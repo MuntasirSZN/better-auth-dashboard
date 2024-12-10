@@ -8,4 +8,4 @@ A better-Auth powered admin dashboard.
 * 🧪 Feature-rich.
 * ⚙️ Configure plugin settings straight from the dashboard.
 * 👮‍♂️ View & manage all users and organizations.
-* 🛡️ Advanced route protection
+* 🛡️ Advanced route protection.
