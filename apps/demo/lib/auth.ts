@@ -6,4 +6,6 @@ export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "sqlite",
   }),
+  appName: "admin-dashboard-demo",
+  plugins: []
 });
