@@ -9,7 +9,8 @@ import {
 type DashboardPluginConfig = {};
 
 export const dashboardPluginWrapper = (
-  plugins: BetterAuthPlugin[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  plugins: any[],
   config: DashboardPluginConfig = {}
 ) => {
   return plugins.concat(dashboardPlugin(config, { plugins }));
@@ -24,9 +25,11 @@ function dashboardPlugin(
   internal_config: InternalConfig
 ) {
   if (!hasAdminPlugin(internal_config.plugins)) {
-    throw new Error(
+    const err = new Error(
       `Admin Dashboard: Missing admin plugin, please include the admin plugin to your server auth instance.`
     );
+    err.stack = undefined;
+    throw err;
   }
 
   const plugin: BetterAuthPlugin = {
