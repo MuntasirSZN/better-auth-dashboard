@@ -123,6 +123,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.18.0
         version: 8.18.0(eslint@9.16.0)(typescript@5.5.4)
+      better-auth:
+        specifier: ^1.0.14
+        version: 1.0.14
       eslint:
         specifier: ^9.16.0
         version: 9.16.0
