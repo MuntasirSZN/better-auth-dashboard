@@ -111,6 +111,9 @@ importers:
 
   packages/admin-dashboard:
     devDependencies:
+      '@eslint/js':
+        specifier: ^9.16.0
+        version: 9.16.0
       '@types/node':
         specifier: ^20
         version: 20.17.6
@@ -132,6 +135,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      typescript-eslint:
+        specifier: ^8.18.0
+        version: 8.18.0(eslint@9.16.0)(typescript@5.5.4)
 
   packages/eslint-config:
     devDependencies:
@@ -3034,6 +3040,13 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  typescript-eslint@8.18.0:
+    resolution: {integrity: sha512-Xq2rRjn6tzVpAyHr3+nmSg1/9k9aIHnJ2iZeOH7cfGOWqTkXTm3kwpQglEuLGdNrYvPF+2gtAs+/KF5rjVo+WQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0
+      typescript: '>=4.8.4 <5.8.0'
 
   typescript@5.5.4:
     resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
@@ -6305,6 +6318,16 @@ snapshots:
       '@typescript-eslint/utils': 8.15.0(eslint@9.15.0)(typescript@5.5.4)
       eslint: 9.15.0
     optionalDependencies:
+      typescript: 5.5.4
+    transitivePeerDependencies:
+      - supports-color
+
+  typescript-eslint@8.18.0(eslint@9.16.0)(typescript@5.5.4):
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 8.18.0(@typescript-eslint/parser@8.18.0(eslint@9.16.0)(typescript@5.5.4))(eslint@9.16.0)(typescript@5.5.4)
+      '@typescript-eslint/parser': 8.18.0(eslint@9.16.0)(typescript@5.5.4)
+      '@typescript-eslint/utils': 8.18.0(eslint@9.16.0)(typescript@5.5.4)
+      eslint: 9.16.0
       typescript: 5.5.4
     transitivePeerDependencies:
       - supports-color
