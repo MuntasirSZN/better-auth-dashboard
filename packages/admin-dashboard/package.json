@@ -1,0 +1,11 @@
+{
+  "name": "admin-dashboard",
+  "description": "A better-Auth powered admin dashboard.",
+  "packageManager": "pnpm@9.0.0",
+  "version": "0.0.0",
+  "private": "false",
+  "license": "MIT",
+  "dependencies": {},
+  "peerDependencies": {},
+  "devDependencies": {}
+}
