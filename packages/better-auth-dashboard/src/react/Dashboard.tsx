@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
+import type { Theme } from "./types";
 
-type DashboardConfig = {
-  components: ReactNode[];
+export type DashboardProps = {
+  children: ReactNode[];
+  theme?: Theme;
+  params: Promise<{ all: string }>;
 };
 
-export const createDashboard = (
-  dashboardConfig: DashboardConfig = { components: [] }
-) => {
-  return async ({ params }: { params: Promise<{ all: string }> }) => {
-    return <h1>My Page {JSON.stringify((await params).all)}</h1>;
-  };
+export const Dashboard = ({ children, theme, params }: DashboardProps) => {
+  
+  return <h1>My Page</h1>;
 };
