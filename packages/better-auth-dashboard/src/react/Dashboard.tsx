@@ -34,7 +34,6 @@ export const Dashboard = ({
       <AppSidebar components={components} path={path} />
       <main>
         <components.SidebarTrigger />
-        Hello world!
       </main>
     </components.SidebarProvider>
   );

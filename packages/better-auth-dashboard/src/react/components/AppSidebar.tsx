@@ -1,5 +1,6 @@
 import {
   Building2,
+  FileSliders,
   Home,
   Search,
   Settings,
@@ -16,7 +17,6 @@ export const AppSidebar = ({
   path: string;
 }) => {
   const {
-    SidebarProvider,
     Sidebar,
     SidebarContent,
     SidebarGroup,
@@ -52,6 +52,11 @@ export const AppSidebar = ({
       title: "Route protection",
       url: `${path}/route-protection`,
       icon: ShieldCheck,
+    },
+    {
+      title: "Plugin Configuration",
+      url: `${path}/plugin-config`,
+      icon: FileSliders,
     },
     {
       title: "Settings",
