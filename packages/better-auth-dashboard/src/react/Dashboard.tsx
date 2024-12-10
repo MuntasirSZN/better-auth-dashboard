@@ -7,7 +7,6 @@ export type DashboardProps = {
   params: Promise<{ all: string }>;
 };
 
-export const Dashboard = ({ children, theme, params }: DashboardProps) => {
-  
+export const Dashboard = ({}: DashboardProps) => {
   return <h1>My Page</h1>;
 };

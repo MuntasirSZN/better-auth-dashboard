@@ -36,7 +36,7 @@ function dashboardPlugin(
     id: "admin-dashboard",
     endpoints: {
       getHelloWorld: createAuthEndpoint(
-        "/admin-dash/",
+        "/dashboard/",
         {
           method: "GET",
         },

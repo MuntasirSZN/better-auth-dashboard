@@ -97,6 +97,9 @@ importers:
       eslint:
         specifier: ^9.16.0
         version: 9.16.0
+      next:
+        specifier: ^15.0.0
+        version: 15.0.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       prettier:
         specifier: ^3.4.2
         version: 3.4.2
