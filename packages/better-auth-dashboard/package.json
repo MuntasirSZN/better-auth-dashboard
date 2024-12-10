@@ -19,8 +19,7 @@
     }
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
+    "build": "tsc && cd ../../ && pnpm i",
     "test": "jest",
     "format": "prettier --write .",
     "lint": "eslint .",
