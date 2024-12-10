@@ -30,6 +30,9 @@ importers:
       better-auth:
         specifier: ^1.0.14
         version: 1.0.14
+      better-auth-dashboard:
+        specifier: workspace:*
+        version: link:../../packages/better-auth-dashboard
       better-sqlite3:
         specifier: ^11.7.0
         version: 11.7.0
@@ -68,7 +71,7 @@ importers:
         specifier: 5.5.4
         version: 5.5.4
 
-  packages/admin-dashboard:
+  packages/better-auth-dashboard:
     devDependencies:
       '@eslint/js':
         specifier: ^9.16.0
@@ -2076,7 +2079,6 @@ packages:
 
   libsql@0.4.7:
     resolution: {integrity: sha512-T9eIRCs6b0J1SHKYIvD8+KCJMcWZ900iZyxdnSCdqxN12Z1ijzT+jY5nrk72Jw4B0HGzms2NgpryArlJqvc3Lw==}
-    cpu: [x64, arm64, wasm32]
     os: [darwin, linux, win32]
 
   lilconfig@3.1.3:

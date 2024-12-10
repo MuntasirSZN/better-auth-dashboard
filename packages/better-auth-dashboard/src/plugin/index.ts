@@ -6,21 +6,21 @@ import {
 } from "better-auth/api";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-type AdminDashboardPluginConfig = {};
+type DashboardPluginConfig = {};
 
-export const adminDashboardPlugin = (
+export const dashboardPluginWrapper = (
   plugins: BetterAuthPlugin[],
-  config: AdminDashboardPluginConfig = {}
+  config: DashboardPluginConfig = {}
 ) => {
-  return plugins.concat(adminDashboardPlugin_internal(config, { plugins }));
+  return plugins.concat(dashboardPlugin(config, { plugins }));
 };
 
 type InternalConfig = {
   plugins: BetterAuthPlugin[];
 };
 
-function adminDashboardPlugin_internal(
-  config: AdminDashboardPluginConfig,
+function dashboardPlugin(
+  config: DashboardPluginConfig,
   internal_config: InternalConfig
 ) {
   if (!hasAdminPlugin(internal_config.plugins)) {
