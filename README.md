@@ -1,15 +1,10 @@
 # admin-dashboard
 
-To install dependencies:
+A better-Auth powered admin dashboard.
 
-```bash
-bun install
-```
+## Features
 
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.1.34. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+* Served on **your** site.
+* Feature-rich.
+* Configure plugin settings straight from the dashboard.
+* View & manage all users and organizations.
