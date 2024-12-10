@@ -1,4 +1,4 @@
-# admin-dashboard
+# better-auth-dashboard
 
 A better-Auth powered admin dashboard.
 
