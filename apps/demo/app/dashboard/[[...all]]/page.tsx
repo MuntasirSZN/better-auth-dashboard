@@ -1,5 +1,7 @@
-import { createDashboard } from "better-auth-dashboard/react";
+import { createDashboard, Users } from "better-auth-dashboard/react";
 
-const Dashboard = createDashboard();
+const Dashboard = createDashboard({
+  components: [<Users />],
+});
 
 export default Dashboard;
