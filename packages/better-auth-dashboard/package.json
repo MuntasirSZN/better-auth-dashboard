@@ -2,13 +2,25 @@
   "name": "better-auth-dashboard",
   "description": "A better-Auth powered admin dashboard.",
   "packageManager": "pnpm@9.0.0",
-  "main": "./src/index.ts",
   "version": "0.0.0",
   "private": "false",
   "license": "MIT",
-  "files": ["./dist/index.js"],
+  "type": "module",
+  "exports": {
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js",
+      "require": "./dist/react/index.js"
+    },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "build": "tsup src/index.ts ",
+    "build": "tsc",
+    "dev": "tsc --watch",
     "test": "jest",
     "format": "prettier --write .",
     "lint": "eslint .",
@@ -17,12 +29,13 @@
   "devDependencies": {
     "@eslint/js": "^9.16.0",
     "@types/node": "^20",
+    "@types/react": "18.3.1",
     "@typescript-eslint/eslint-plugin": "^8.18.0",
     "@typescript-eslint/parser": "^8.18.0",
     "better-auth": "^1.0.14",
     "eslint": "^9.16.0",
     "prettier": "^3.4.2",
-    "tsup": "^8.3.5",
+    "react": "^19.0.0",
     "typescript": "5.5.4",
     "typescript-eslint": "^8.18.0"
   },
