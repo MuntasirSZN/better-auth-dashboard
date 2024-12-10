@@ -6,6 +6,7 @@ import {
   Theme,
   Users,
 } from "better-auth-dashboard/react";
+import * as components from "@/components/components/ui";
 
 const theme: Theme = {
   name: "some_theme_name",
@@ -19,10 +20,11 @@ const theme: Theme = {
   primary: "",
   secondary: "",
 };
+components.SidebarGroup
 
 export default async ({ params }: { params: Promise<{ all: string }> }) => {
   return (
-    <Dashboard theme={theme} params={params}>
+    <Dashboard theme={theme} params={params} components={components}>
       <Users />
       <Organizations />
       <RouteManager />
