@@ -64,6 +64,13 @@ type TooltipContent = ShadCNComponent<
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
 >;
 
+type SidebarTrigger = ShadCNComponent<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  React.ElementRef<any>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  React.ComponentProps<any>
+>;
+
 export type RequiredComponents = {
   SidebarProvider: SidebarProvider;
   Sidebar: Sidebar;
@@ -74,4 +81,5 @@ export type RequiredComponents = {
   SidebarMenu: SidebarMenu;
   SidebarMenuItem: SidebarMenuItem;
   SidebarMenuButton: SidebarMenuButton;
+  SidebarTrigger: SidebarTrigger;
 };
