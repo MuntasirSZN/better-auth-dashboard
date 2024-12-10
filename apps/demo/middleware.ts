@@ -5,7 +5,8 @@ import {
 } from "better-auth-dashboard/next";
 
 export const middleware = dashboardMiddleware((request) => {
-  return NextResponse.redirect(new URL("/home", request.url));
+  // middleware code...
+  return NextResponse.next();
 });
 
 export const config = {
@@ -15,6 +16,6 @@ export const config = {
     // Always run for API routes
     "/(api|trpc)(.*)",
     // Dashboard matcher
-    dashboardMatcher(),
+    ...dashboardMatcher(),
   ],
 };
