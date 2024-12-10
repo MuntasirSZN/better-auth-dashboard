@@ -51,3 +51,19 @@ export const verification = sqliteTable("verification", {
   createdAt: integer("createdAt", { mode: "timestamp" }),
   updatedAt: integer("updatedAt", { mode: "timestamp" }),
 });
+
+export const routeProtection = sqliteTable("routeProtection", {
+  id: text("id").primaryKey(),
+  route: text("route").notNull().unique(),
+  isRoleProtected: integer("isRoleProtected", { mode: "boolean" }).notNull(),
+  roleProtection: text("roleProtection").notNull(),
+  isAccAgeProtected: integer("isAccAgeProtected", {
+    mode: "boolean",
+  }).notNull(),
+  accAgeProtection: integer("accAgeProtection", {
+    mode: "timestamp",
+  }).notNull(),
+  isAuthenticatedProtected: integer("isAuthenticatedProtected", {
+    mode: "boolean",
+  }).notNull(),
+});
