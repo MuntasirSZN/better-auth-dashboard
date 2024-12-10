@@ -1,6 +1,6 @@
 # better-auth-dashboard
 
-A better-Auth powered admin dashboard.
+A [Better-Auth](https://www.better-auth.com/) powered admin dashboard.
 
 ## Features
 
