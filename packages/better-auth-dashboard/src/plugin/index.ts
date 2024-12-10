@@ -24,8 +24,8 @@ function dashboardPlugin(
   internal_config: InternalConfig
 ) {
   if (!hasAdminPlugin(internal_config.plugins)) {
-    throw console.error(
-      `Admin Dashboard: Missing admin plugin.\nPlease include the admin plugin to your server auth instance.`
+    throw new Error(
+      `Admin Dashboard: Missing admin plugin, please include the admin plugin to your server auth instance.`
     );
   }
 
@@ -45,7 +45,6 @@ function dashboardPlugin(
               message: `Invalid or missing session.`,
             });
           }
-
 
           return ctx.json({
             message: "Hello World",
