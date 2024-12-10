@@ -34,9 +34,46 @@ function dashboardPlugin(
 
   const plugin: BetterAuthPlugin = {
     id: "admin-dashboard",
+    schema: {
+      routeProtection: {
+        fields: {
+          route: {
+            type: "string",
+            unique: true,
+            required: true,
+            input: true,
+          },
+          isRoleProtected: {
+            type: "boolean",
+            input: true,
+            required: true,
+          },
+          roleProtection: {
+            type: "string",
+            input: true,
+            required: true,
+          },
+          isAccAgeProtected: {
+            type: "boolean",
+            input: true,
+            required: true,
+          },
+          accAgeProtection: {
+            type: "date",
+            input: true,
+            required: true,
+          },
+          isAuthenticatedProtected: {
+            type: "boolean",
+            input: true,
+            required: true,
+          },
+        },
+      },
+    },
     endpoints: {
-      getHelloWorld: createAuthEndpoint(
-        "/dashboard/",
+      routeProtection: createAuthEndpoint(
+        "/dashboard/route-protection",
         {
           method: "GET",
         },
