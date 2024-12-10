@@ -5,7 +5,8 @@ A better-Auth powered admin dashboard.
 ## Features
 
 - 🫵 Served on **your** site.
-- 🧪 Feature-rich.
-- ⚙️ Configure plugin settings straight from the dashboard.
-- 👮‍♂️ View & manage all users and organizations.
+- ⚙️ Configure plugins straight from the dashboard.
+- 👮‍♂️ View & manage users and organizations.
 - 🛡️ Advanced route protection.
+- 🔒 Emergency Lockdowns.
+- 📦 Dynamic Dashboard System. 
