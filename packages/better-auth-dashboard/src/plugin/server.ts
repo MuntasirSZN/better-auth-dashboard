@@ -14,11 +14,11 @@ type DashboardPluginConfig = {
   pluginInsertPosition?: number;
 };
 
-export const dashboardPluginWrapper = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  plugins: any[],
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const dashboardPluginWrapper = <PluginsArr extends any[]>(
+  plugins: PluginsArr,
   config: DashboardPluginConfig = {}
-) => {
+): [ReturnType<DashboardPlugin>, ...PluginsArr] => {
   const { pluginInsertPosition = 0 } = config;
   plugins.splice(pluginInsertPosition, 0, dashboardPlugin(config, { plugins }));
   return plugins;
@@ -30,17 +30,7 @@ type InternalConfig = {
 
 export type DashboardPlugin = typeof dashboardPlugin;
 
-function dashboardPlugin(
-  config: DashboardPluginConfig,
-  internal_config: InternalConfig
-) {
-  if (!hasAdminPlugin(internal_config.plugins)) {
-    const err = new Error(
-      `Admin Dashboard: Missing admin plugin, please include the admin plugin to your server auth instance.`
-    );
-    err.stack = undefined;
-    throw err;
-  }
+export function dashboardPlugin(config: DashboardPluginConfig) {
 
   const plugin: BetterAuthPlugin = {
     id: "better-auth-dashboard",
@@ -60,16 +50,6 @@ function dashboardPlugin(
           },
           roleProtection: {
             type: "string",
-            input: true,
-            required: true,
-          },
-          isAccAgeProtected: {
-            type: "boolean",
-            input: true,
-            required: true,
-          },
-          accAgeProtection: {
-            type: "date",
             input: true,
             required: true,
           },
