@@ -1,33 +1,18 @@
 "use client";
-import {
-  Dashboard,
-  Organizations,
-  RouteManager,
-  Theme,
-  Users,
-} from "better-auth-dashboard/react";
+import { Dashboard, Users } from "better-auth-dashboard/react";
 import * as components from "@/components/components/ui";
-
-const theme: Theme = {
-  name: "some_theme_name",
-  scheme: "dark",
-  background: "",
-  content1: "",
-  content2: "",
-  content3: "",
-  content4: "",
-  default: "",
-  primary: "",
-  secondary: "",
-};
-components.SidebarGroup;
 
 export default ({ params }: { params: Promise<{ all: string }> }) => {
   return (
-    <Dashboard theme={theme} params={params} components={components}>
+    <Dashboard params={params} components={components}>
       <Users />
-      <Organizations />
-      <RouteManager />
+      <Users/>
     </Dashboard>
   );
 };
+{
+  /* <Organizations /> */
+}
+{
+  /* <RouteManager /> */
+}
