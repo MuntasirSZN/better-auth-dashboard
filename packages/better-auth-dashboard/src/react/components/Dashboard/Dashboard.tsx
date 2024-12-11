@@ -2,6 +2,7 @@ import { memo } from "react";
 import type { Plugin, RequiredComponents } from "../../types";
 import { AppSidebar } from "./AppSidebar";
 import { dashboardContext } from "./dashboardContext";
+import type { createAuthClient } from "better-auth/react";
 
 export type DashboardProps = {
   /**
@@ -20,6 +21,10 @@ export type DashboardProps = {
    * List of dashboard plugins.
    */
   plugins: Plugin[];
+  /**
+   * Your Better-Auth client auth instance.
+   */
+  authClient: ReturnType<typeof createAuthClient>;
 };
 
 export const Dashboard = memo(

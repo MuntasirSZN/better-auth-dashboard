@@ -7,6 +7,7 @@ import {
   pluginConfiguration,
 } from "better-auth-dashboard/react";
 import * as components from "@/components/components/ui";
+import { authClient } from "lib/auth-client";
 
 export default ({ params }: { params: Promise<{ all: string }> }) => {
   return (
@@ -19,6 +20,7 @@ export default ({ params }: { params: Promise<{ all: string }> }) => {
         routeProtection(),
         pluginConfiguration(),
       ]}
+      authClient={authClient}
     />
   );
 };
