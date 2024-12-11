@@ -1,3 +1,3 @@
 export * from "./users";
 export * from "./organizations";
-export * from "./routeManager";
+export * from "./routeProtection";

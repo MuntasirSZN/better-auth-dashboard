@@ -1,12 +1,5 @@
 "use client";
-import {
-  Building2,
-  FileSliders,
-  Home,
-  Search,
-  Settings,
-  ShieldCheck,
-} from "lucide-react";
+import { FileSliders, Home, Search, Settings } from "lucide-react";
 import type { Plugin, RequiredComponents } from "../../../types";
 import { memo, useEffect, useState } from "react";
 
@@ -42,16 +35,6 @@ export const AppSidebar = memo(
         title: "Search",
         url: `${path}/search`,
         icon: Search,
-      },
-      {
-        title: "Organizations",
-        url: `${path}/organizations`,
-        icon: Building2,
-      },
-      {
-        title: "Route protection",
-        url: `${path}/route-protection`,
-        icon: ShieldCheck,
       },
       {
         title: "Plugin Configuration",
@@ -98,8 +81,9 @@ export const AppSidebar = memo(
                           );
                           setPathname(item.url);
                         }}
+                        className="cursor-pointer select-none"
                       >
-                        <div>
+                        <div className="w-full h-full">
                           <item.icon />
                           <span>{item.title}</span>
                         </div>
