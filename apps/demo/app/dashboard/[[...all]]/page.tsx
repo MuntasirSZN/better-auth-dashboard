@@ -4,9 +4,7 @@ import * as components from "@/components/components/ui";
 
 export default ({ params }: { params: Promise<{ all: string }> }) => {
   return (
-    <Dashboard params={params} components={components}>
-      <Users />
-    </Dashboard>
+    <Dashboard params={params} components={components} plugins={[Users()]} />
   );
 };
 {

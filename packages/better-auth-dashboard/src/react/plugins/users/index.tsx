@@ -1,22 +1,12 @@
 import { Users as UsersIcon } from "lucide-react";
-import { useDashboard } from "../../components";
-import { useEffect, useRef } from "react";
+import type { Plugin } from "../../types";
 
-export const Users = () => {
-  const dashbaord = useDashboard();
-  const ranOnce = useRef(false);
+export const Users: () => Plugin = () => {
+  // const component = <div>Hello from users plugin!</div>;
 
-  useEffect(() => {
-    if(ranOnce.current === true) return;
-    ranOnce.current = true;
-    dashbaord.initPlugin({
-      icon: UsersIcon,
-      title: "Users",
-      slug: "users",
-    });
-  }, []);
-
-  const component = <div>Hello from users plugin!</div>;
-
-  return component;
+  return {
+    icon: UsersIcon,
+    title: "Users",
+    slug: "users",
+  };
 };

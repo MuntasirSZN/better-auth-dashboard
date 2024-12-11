@@ -90,11 +90,19 @@ export const AppSidebar = memo(
                         asChild
                         isActive={pathname === item.url}
                         suppressHydrationWarning
+                        onClick={() => {
+                          window.history.pushState(
+                            item.title,
+                            item.title,
+                            item.url
+                          );
+                          setPathname(item.url);
+                        }}
                       >
-                        <a href={item.url}>
+                        <div>
                           <item.icon />
                           <span>{item.title}</span>
-                        </a>
+                        </div>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   );

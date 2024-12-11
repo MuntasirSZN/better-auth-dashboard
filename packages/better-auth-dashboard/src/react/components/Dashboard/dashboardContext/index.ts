@@ -1,9 +1,7 @@
 import { createContext } from "react";
-import type { Plugin } from "../../../types";
 
-export type DashboardContext = {
-  initPlugin: ({ icon, title, slug }: Plugin) => void;
-};
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export type DashboardContext = {};
 
 //@ts-expect-error - intentional.
 export const dashboardContext = createContext<DashboardContext>(null);
