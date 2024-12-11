@@ -49,10 +49,12 @@
   "peerDependencies": {
     "@radix-ui/react-collapsible": "^1.1.1",
     "@radix-ui/react-tooltip": "^1.1.4",
-    "better-auth": "^1.0.14",
+    "better-fetch": "^1.1.2",
     "next": "^15.0.0"
   },
   "dependencies": {
+    "@better-fetch/fetch": "^1.1.12",
+    "better-auth": "^1.0.14",
     "lucide-react": "^0.468.0"
   }
 }
