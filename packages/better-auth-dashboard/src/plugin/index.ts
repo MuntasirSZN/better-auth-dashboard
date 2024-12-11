@@ -5,15 +5,22 @@ import {
   getSessionFromCtx,
 } from "better-auth/api";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-type DashboardPluginConfig = {};
+type DashboardPluginConfig = {
+  /**
+   * The index where the dashboard plugin must insert itself in the array.
+   * @default 0
+   */
+  pluginInsertPosition?: number;
+};
 
 export const dashboardPluginWrapper = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   plugins: any[],
   config: DashboardPluginConfig = {}
 ) => {
-  return plugins.concat(dashboardPlugin(config, { plugins }));
+  const { pluginInsertPosition = 0 } = config;
+  plugins.splice(pluginInsertPosition, 0, dashboardPlugin(config, { plugins }));
+  return plugins;
 };
 
 type InternalConfig = {
