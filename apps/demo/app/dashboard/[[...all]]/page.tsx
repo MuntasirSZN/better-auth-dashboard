@@ -1,3 +1,4 @@
+"use client";
 import {
   Dashboard,
   Organizations,
@@ -21,13 +22,9 @@ const theme: Theme = {
 };
 components.SidebarGroup;
 
-export default async ({ params }: { params: Promise<{ all: string }> }) => {
+export default ({ params }: { params: Promise<{ all: string }> }) => {
   return (
-    <Dashboard
-      theme={theme}
-      params={params}
-      components={components}
-    >
+    <Dashboard theme={theme} params={params} components={components}>
       <Users />
       <Organizations />
       <RouteManager />

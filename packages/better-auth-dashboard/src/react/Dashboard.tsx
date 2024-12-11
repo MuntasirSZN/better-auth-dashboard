@@ -1,3 +1,4 @@
+"use client";
 import type { ReactNode } from "react";
 import type { RequiredComponents, Theme } from "./types";
 import { AppSidebar } from "./components/AppSidebar";

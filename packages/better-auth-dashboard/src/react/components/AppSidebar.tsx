@@ -1,3 +1,4 @@
+"use client";
 import {
   Building2,
   FileSliders,
@@ -8,6 +9,7 @@ import {
   Users,
 } from "lucide-react";
 import type { RequiredComponents } from "../types";
+import { useEffect, useState } from "react";
 
 export const AppSidebar = ({
   components,
@@ -16,6 +18,7 @@ export const AppSidebar = ({
   components: RequiredComponents;
   path: string;
 }) => {
+  const [pathname, setPathname] = useState("");
   const {
     Sidebar,
     SidebarContent,
@@ -65,6 +68,10 @@ export const AppSidebar = ({
     },
   ];
 
+  useEffect(() => {
+    setPathname(typeof window !== "undefined" ? window.location.pathname : "")
+  }, []);
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -72,16 +79,22 @@ export const AppSidebar = ({
           <SidebarGroupLabel>Admin Dashboard</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {items.map((item) => {
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={pathname === item.url}
+                      suppressHydrationWarning
+                    >
+                      <a href={item.url}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                      </a>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
