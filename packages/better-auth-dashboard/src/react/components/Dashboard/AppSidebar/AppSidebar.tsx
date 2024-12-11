@@ -6,7 +6,6 @@ import {
   Search,
   Settings,
   ShieldCheck,
-  Users,
 } from "lucide-react";
 import type { Plugin, RequiredComponents } from "../../../types";
 import { memo, useEffect, useState } from "react";
@@ -45,11 +44,6 @@ export const AppSidebar = memo(
         icon: Search,
       },
       {
-        title: "Users",
-        url: `${path}/users`,
-        icon: Users,
-      },
-      {
         title: "Organizations",
         url: `${path}/organizations`,
         icon: Building2,
@@ -64,19 +58,17 @@ export const AppSidebar = memo(
         url: `${path}/plugin-config`,
         icon: FileSliders,
       },
-      {
-        title: "Settings",
-        url: `${path}/settings`,
-        icon: Settings,
-      },
       ...plugins.map((x) => ({
         title: x.title,
         url: `${path}/${x.slug}`,
         icon: x.icon,
       })),
+      {
+        title: "Settings",
+        url: `${path}/settings`,
+        icon: Settings,
+      },
     ];
-
-    console.log(items, plugins)
 
     useEffect(() => {
       setPathname(

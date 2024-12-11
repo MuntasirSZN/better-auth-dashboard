@@ -6,7 +6,6 @@ export default ({ params }: { params: Promise<{ all: string }> }) => {
   return (
     <Dashboard params={params} components={components}>
       <Users />
-      <Users/>
     </Dashboard>
   );
 };
