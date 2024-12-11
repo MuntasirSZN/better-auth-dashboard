@@ -1,9 +1,9 @@
 {
-  "mode": "exit",
+  "mode": "pre",
   "tag": "beta",
   "initialVersions": {
-    "docs": "0.1.1",
-    "better-auth-dashboard": "0.0.1"
+    "docs": "0.1.2-beta.0",
+    "better-auth-dashboard": "0.0.2-beta.0"
   },
   "changesets": [
     "smart-rivers-grab"
