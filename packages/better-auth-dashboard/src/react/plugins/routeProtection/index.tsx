@@ -1,4 +1,4 @@
-import { ShieldCheck } from "lucide-react";
+import { Home, ShieldCheck } from "lucide-react";
 import type { Plugin } from "../../types";
 
 export const routeProtection: () => Plugin = () => {
@@ -12,6 +12,7 @@ export const routeProtection: () => Plugin = () => {
       {
         title: "test",
         slug: "test",
+        icon: Home
       },
     ],
   };

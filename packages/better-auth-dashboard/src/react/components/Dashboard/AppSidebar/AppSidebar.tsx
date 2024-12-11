@@ -8,7 +8,7 @@ type Item = {
   title: string;
   url: string;
   icon: Plugin["icon"];
-  subItems: { title: string; url: string }[];
+  subItems: { title: string; url: string; icon: Plugin["icon"] }[];
 };
 
 export const AppSidebar = memo(
@@ -55,6 +55,7 @@ export const AppSidebar = memo(
         subItems: x.subItems.map((z) => ({
           title: z.title,
           url: `${path}/${x.slug}/${z.slug}`,
+          icon: z.icon,
         })),
       })),
       // {
@@ -102,25 +103,6 @@ export const AppSidebar = memo(
                             className="text-sm group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                           >
                             <CollapsibleTrigger className="py-2 min-h-[35px]">
-                              {/* <SidebarMenuButton
-                                asChild
-                                isActive={pathname === item.url}
-                                suppressHydrationWarning
-                                onClick={() => {
-                                  window.history.pushState(
-                                    item.title,
-                                    item.title,
-                                    item.url
-                                  );
-                                  setPathname(item.url);
-                                }}
-                                className="cursor-pointer select-none"
-                              >
-                                <div className="w-full h-full">
-                                  <item.icon />
-                                  <span>{item.title}</span>
-                                </div>
-                              </SidebarMenuButton> */}
                               <div className="flex items-center w-full gap-2 h-5 [&>svg]:size-4">
                                 <item.icon />
                                 <span>{item.title}</span>
@@ -130,7 +112,7 @@ export const AppSidebar = memo(
                           </SidebarGroupLabel>
                           <CollapsibleContent>
                             <SidebarGroupContent>
-                              <SidebarMenu className="pl-2 mt-2">
+                              <SidebarMenu className="pl-2 mt-1">
                                 {item.subItems.map((item) => (
                                   <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton
@@ -145,7 +127,10 @@ export const AppSidebar = memo(
                                         setPathname(item.url);
                                       }}
                                     >
-                                      <span>{item.title}</span>
+                                      <div>
+                                        <item.icon />
+                                        <span>{item.title}</span>
+                                      </div>
                                     </SidebarMenuButton>
                                   </SidebarMenuItem>
                                 ))}
