@@ -6,6 +6,9 @@
   "private": "false",
   "license": "MIT",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     "./react": {
       "types": "./dist/react/index.d.ts",
