@@ -24,10 +24,15 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 8
-          
+
       - name: Install Dependencies
         run: pnpm install
 
+      - name: Setup Git User
+        shell: bash
+        run: |
+          git config --global user.email "maxwell.multinite@gmail.com"
+          git config --global user.name "Multinite"
 
       - name: Build
         run: pnpm run build
