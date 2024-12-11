@@ -1,6 +1,5 @@
 "use client";
 import { ChevronRight, Home } from "lucide-react";
-// import { Search, Settings  } from "lucide-react";
 import type { Plugin, RequiredComponents } from "../../../types";
 import { memo, useEffect, useState } from "react";
 

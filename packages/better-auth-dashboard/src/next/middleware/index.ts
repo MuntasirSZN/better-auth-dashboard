@@ -1,24 +1,26 @@
+import type { createAuthClient } from "better-auth/client";
 import type { NextRequest, NextResponse } from "next/server";
-// import { createAuthClient } from "better-auth/react"
 
-// export const authClient = createAuthClient({
-//     baseURL: `http://localhost:${process.env.PORT}`
-// })
 
 export const dashboardMiddleware = (
-  callback: (request?: NextRequest) => Promise<void | NextResponse> | void | NextResponse
+  auth: ReturnType<typeof createAuthClient>,
+  callback: (
+    request?: NextRequest
+  ) => Promise<void | NextResponse> | void | NextResponse
 ) => {
   return async (request: NextRequest) => {
-    // const session = await authClient.getSession();
-    // if(session.error){
-    //     console.error(session.error);
-    //     throw session.error;
-    // }
+    const {data, error} = await auth.getSession({fetchOptions: {headers: request.headers}});
+
+    if(error){
+        console.error(error);
+        throw error;
+    }
+    console.log(data)
 
     return await callback(request);
   };
 };
 
 export const dashboardMatcher = () => {
-  return [];
-}
+  return [`/dashboard/:path*`];
+};
