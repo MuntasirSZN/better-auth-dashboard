@@ -11,7 +11,7 @@ type DashboardPluginConfig = {};
 
 export type DashboardPlugin = typeof dashboardPlugin;
 
-export function dashboardPlugin(config: DashboardPluginConfig) {
+export function dashboardPlugin(config: DashboardPluginConfig = {}) {
   const plugin: BetterAuthPlugin = {
     id: "better-auth-dashboard",
     schema: {
