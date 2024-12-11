@@ -2,4 +2,4 @@
 "better-auth-dashboard": patch
 ---
 
-init
+fix: release flow
