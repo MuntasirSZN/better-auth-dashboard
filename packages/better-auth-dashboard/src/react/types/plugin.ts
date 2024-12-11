@@ -7,4 +7,5 @@ export type Plugin = {
   icon: ForwardRefExoticComponent<
     Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
   >;
+  subItems: { title: string; slug: string }[];
 };

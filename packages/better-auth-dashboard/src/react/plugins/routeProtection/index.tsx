@@ -8,5 +8,11 @@ export const routeProtection: () => Plugin = () => {
     icon: ShieldCheck,
     title: "Route Protection",
     slug: "route-protection",
+    subItems: [
+      {
+        title: "test",
+        slug: "test",
+      },
+    ],
   };
 };

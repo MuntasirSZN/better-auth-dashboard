@@ -1,4 +1,5 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import * as CollapsiblePrimitive from "@radix-ui/react-collapsible";
 import type { forwardRef } from "react";
 
 type ShadCNComponent<T1, T2> = ReturnType<typeof forwardRef<T1, T2>>;
@@ -71,6 +72,10 @@ type SidebarTrigger = ShadCNComponent<
   React.ComponentProps<any>
 >;
 
+type Collapsible = typeof CollapsiblePrimitive.Collapsible;
+type CollapsibleTrigger = typeof CollapsiblePrimitive.CollapsibleTrigger;
+type CollapsibleContent = typeof CollapsiblePrimitive.CollapsibleContent;
+
 export type RequiredComponents = {
   SidebarProvider: SidebarProvider;
   Sidebar: Sidebar;
@@ -82,4 +87,7 @@ export type RequiredComponents = {
   SidebarMenuItem: SidebarMenuItem;
   SidebarMenuButton: SidebarMenuButton;
   SidebarTrigger: SidebarTrigger;
+  Collapsible: Collapsible;
+  CollapsibleTrigger: CollapsibleTrigger;
+  CollapsibleContent: CollapsibleContent;
 };

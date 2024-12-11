@@ -4,6 +4,7 @@ import {
   organizations,
   routeProtection,
   users,
+  pluginConfiguration,
 } from "better-auth-dashboard/react";
 import * as components from "@/components/components/ui";
 
@@ -12,7 +13,14 @@ export default ({ params }: { params: Promise<{ all: string }> }) => {
     <Dashboard
       params={params}
       components={components}
-      plugins={[users(), organizations(), routeProtection()]}
+      plugins={[
+        users(),
+        organizations(),
+        routeProtection(),
+        pluginConfiguration(),
+      ]}
     />
   );
 };
+
+
