@@ -2,6 +2,10 @@
 
 A [Better-Auth](https://www.better-auth.com/) powered admin dashboard.
 
+# WARNING
+
+This package is not ready.
+
 ## Features
 
 - 🫵 Served on **your** site.
@@ -9,7 +13,7 @@ A [Better-Auth](https://www.better-auth.com/) powered admin dashboard.
 - 👮‍♂️ View & manage users and organizations.
 - 🛡️ Advanced route protection.
 - 🔒 Emergency Lockdowns.
-- 📦 Dynamic Dashboard System. 
+- 📦 Dynamic Dashboard System.
 
 ## Get started
 
