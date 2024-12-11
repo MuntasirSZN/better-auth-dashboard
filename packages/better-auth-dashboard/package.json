@@ -5,6 +5,16 @@
   "version": "0.0.2",
   "license": "MIT",
   "type": "module",
+  "keywords": [
+    "better-auth",
+    "dashboard",
+    "auth-dashboard",
+    "route-protection",
+    "admin",
+    "admin-dashboard",
+    "users",
+    "organizations"
+  ],
   "publishConfig": {
     "access": "public"
   },
