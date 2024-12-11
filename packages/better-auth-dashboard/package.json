@@ -2,7 +2,7 @@
   "name": "better-auth-dashboard",
   "description": "A better-Auth powered admin dashboard.",
   "packageManager": "pnpm@9.0.0",
-  "version": "0.0.2-beta.0",
+  "version": "0.0.2",
   "license": "MIT",
   "type": "module",
   "publishConfig": {

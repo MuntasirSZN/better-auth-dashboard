@@ -1,5 +1,18 @@
 # better-auth-dashboard
 
+## 0.0.2
+
+### Patch Changes
+
+- d14e649: add: readme
+- 9cffece: fix: release flow
+
+## 0.0.2-beta.1
+
+### Patch Changes
+
+- d14e649: add: readme
+
 ## 0.0.2-beta.0
 
 ### Patch Changes
