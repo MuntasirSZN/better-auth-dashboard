@@ -18,7 +18,6 @@ export default ({ params }: { params: Promise<{ all: string }> }) => {
         users(),
         organizations(),
         routeProtection(),
-        pluginConfiguration(),
       ]}
       authClient={authClient}
     />
