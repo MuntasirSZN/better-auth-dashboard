@@ -33,8 +33,8 @@ export const Dashboard = memo(
       <dashboardContext.Provider value={{}}>
         <components.SidebarProvider>
           <AppSidebar components={components} path={path} plugins={plugins} />
-          <main>
-            <components.SidebarTrigger />
+          <main className="w-full h-screen relatvie">
+            <components.SidebarTrigger className="absolute" />
           </main>
         </components.SidebarProvider>
       </dashboardContext.Provider>
