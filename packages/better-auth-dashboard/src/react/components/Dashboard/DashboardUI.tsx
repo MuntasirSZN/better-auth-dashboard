@@ -59,7 +59,7 @@ export const DashboardUI = memo(
       <>
         <AppSidebar components={components} setItems={setItems} items={items} />
         <main className="w-full h-screen p-10 relatvie">
-          <components.SidebarTrigger className="absolute -mt-8 -ml-8" />
+          <components.SidebarTrigger className="absolute -ml-8 bottom-1" />
           {items.find((x) => x.isActive)?.component()}
         </main>
       </>
