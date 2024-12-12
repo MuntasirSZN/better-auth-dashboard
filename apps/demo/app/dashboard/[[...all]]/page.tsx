@@ -13,7 +13,7 @@ export default ({ params }: { params: Promise<{ all: string }> }) => {
     <Dashboard
       params={params}
       components={components}
-      authClient={authClient}
+      authClient={authClient as any}
       plugins={[users(), organizations(), routeProtection()]}
     />
   );

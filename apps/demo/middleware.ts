@@ -3,9 +3,8 @@ import {
   dashboardMatcher,
   dashboardMiddleware,
 } from "better-auth-dashboard/next";
-import {auth} from "./lib/auth";
 
-export const middleware = dashboardMiddleware(auth, (request) => {
+export const middleware = dashboardMiddleware((request) => {
   // middleware code...
   return NextResponse.next();
 });

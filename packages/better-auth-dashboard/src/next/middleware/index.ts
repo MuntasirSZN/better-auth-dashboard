@@ -1,21 +1,31 @@
-import type { createAuthClient } from "better-auth/client";
 import type { NextRequest, NextResponse } from "next/server";
 
+export type DashboardMiddlewareOptions = {
+  baseURL?: string;
+};
 
 export const dashboardMiddleware = (
-  auth: ReturnType<typeof createAuthClient>,
   callback: (
     request?: NextRequest
-  ) => Promise<void | NextResponse> | void | NextResponse
+  ) => Promise<void | NextResponse> | void | NextResponse,
+  options: DashboardMiddlewareOptions = {}
 ) => {
   return async (request: NextRequest) => {
-    const {data, error} = await auth.getSession({fetchOptions: {headers: request.headers}});
+    const { baseURL = new URL(request.url).origin } = options;
 
-    if(error){
-        console.error(error);
-        throw error;
-    }
-    console.log(data)
+    const getSessionURL = new URL("/auth/get-session", baseURL);
+    fetch(getSessionURL, {
+      headers: request.headers,
+    })
+      .then((response) => response.json)
+      //@ts-expect-error - intentional
+      .then(({ data, error }: { data: unknown; error: Error | null }) => {
+        console.log(`middleware fetched:`, data, error);
+        if (error) {
+          console.error(error);
+          throw error;
+        }
+      });
 
     return await callback(request);
   };

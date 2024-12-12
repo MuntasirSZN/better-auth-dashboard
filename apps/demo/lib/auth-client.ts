@@ -4,5 +4,7 @@ import { adminClient } from "better-auth/client/plugins"
 
 export const authClient = createAuthClient({
   baseURL: "http://localhost:3000",
-  plguns: [dashboardClientPlugin(), adminClient()],
+  plugins: [],
 });
+
+//dashboardClientPlugin(), adminClient()
