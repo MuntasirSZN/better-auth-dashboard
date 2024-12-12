@@ -1,8 +1,8 @@
 import { memo } from "react";
 import type { Plugin, RequiredComponents } from "../../types";
-import { AppSidebar } from "./AppSidebar";
 import { dashboardContext } from "./dashboardContext";
 import type { createAuthClient } from "better-auth/react";
+import { DashboardUI } from "./DashboardUI";
 
 export type DashboardProps = {
   /**
@@ -32,10 +32,7 @@ export const Dashboard = memo(
     return (
       <dashboardContext.Provider value={{}}>
         <components.SidebarProvider>
-          <AppSidebar components={components} path={path} plugins={plugins} />
-          <main className="w-full h-screen relatvie">
-            <components.SidebarTrigger className="absolute" />
-          </main>
+          <DashboardUI components={components} path={path} plugins={plugins} />
         </components.SidebarProvider>
       </dashboardContext.Provider>
     );

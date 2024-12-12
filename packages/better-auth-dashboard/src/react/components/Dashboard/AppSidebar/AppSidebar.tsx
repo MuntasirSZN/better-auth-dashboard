@@ -7,7 +7,13 @@ type Item = {
   title: string;
   url: string;
   icon: Plugin["icon"];
-  subItems: { title: string; url: string; icon: Plugin["icon"] }[];
+  subItems: {
+    title: string;
+    url: string;
+    icon: Plugin["icon"];
+    isActive: boolean;
+  }[];
+  isActive: boolean;
 };
 
 export const AppSidebar = memo(
@@ -20,7 +26,6 @@ export const AppSidebar = memo(
     path: string;
     plugins: Plugin[];
   }) => {
-    const [pathname, setPathname] = useState("");
     const {
       Sidebar,
       SidebarContent,
@@ -35,12 +40,13 @@ export const AppSidebar = memo(
       CollapsibleTrigger,
     } = components;
 
-    const items: Item[] = [
+    const [items, setItems] = useState<Item[]>([
       {
         title: "Home",
         url: `${path}`,
         icon: Home,
         subItems: [],
+        isActive: false,
       },
       // {
       //   title: "Search",
@@ -50,11 +56,13 @@ export const AppSidebar = memo(
       ...plugins.map((x) => ({
         title: x.title,
         url: `${path}/${x.slug}`,
+        isActive: false,
         icon: x.icon,
         subItems: x.subItems.map((z) => ({
           title: z.title,
           url: `${path}/${x.slug}/${z.slug}`,
           icon: z.icon,
+          isActive: false,
         })),
       })),
       // {
@@ -62,12 +70,37 @@ export const AppSidebar = memo(
       //   url: `${path}/settings`,
       //   icon: Settings,
       // },
-    ];
+    ]);
 
     useEffect(() => {
-      setPathname(
-        typeof window !== "undefined" ? window.location.pathname : ""
-      );
+      const pathname = window.location.pathname;
+      const found = items.find((x) => x.url === pathname);
+      if (found) {
+        setItems((x) => [
+          ...x.filter((z) => z.url !== pathname),
+          { ...found, isActive: true },
+        ]);
+      } else {
+        const found = items.find((x) =>
+          x.subItems.find((x) => x.url === pathname)
+        );
+        if (found) {
+          setItems((x) => [
+            ...x.filter((z, i) => i === x.indexOf(found)),
+            {
+              ...found,
+              isActive: true,
+              subItems: [
+                ...found.subItems.filter((x) => x.url !== pathname),
+                {
+                  ...found.subItems.find((x) => x.url === pathname)!,
+                  isActive: true,
+                },
+              ],
+            },
+          ]);
+        }
+      }
     }, []);
 
     return (
@@ -83,10 +116,19 @@ export const AppSidebar = memo(
                       <SidebarItem
                         SidebarMenuButton={SidebarMenuButton}
                         item={item}
-                        pathname={pathname}
-                        setPathname={setPathname}
                         SidebarMenuItem={SidebarMenuItem}
                         key={item.title + i}
+                        setItemActive={() => {
+                          setItems((z) => {
+                            const currentActive = items.find(
+                              (x) => x.isActive
+                            )!;
+
+                            z[z.indexOf(currentActive)].isActive = false;
+                            z[z.indexOf(item)].isActive = true;
+                            return z;
+                          });
+                        }}
                       />
                     );
                   } else {
@@ -116,14 +158,23 @@ export const AppSidebar = memo(
                                   <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton
                                       asChild
-                                      isActive={pathname === item.url}
+                                      isActive={item.isActive}
                                       onClick={() => {
                                         window.history.pushState(
                                           item.title,
                                           item.title,
                                           item.url
                                         );
-                                        setPathname(item.url);
+                                        setItems((z) => {
+                                          const currentActive = items.find(
+                                            (x) => x.isActive
+                                          )!;
+
+                                          z[z.indexOf(currentActive)].isActive =
+                                            false;
+                                          z[z.indexOf(item)].isActive = true;
+                                          return z;
+                                        });
                                       }}
                                     >
                                       <div>
@@ -155,12 +206,10 @@ function SidebarItem({
   SidebarMenuButton,
   SidebarMenuItem,
   item,
-  pathname,
-  setPathname,
+  setItemActive,
 }: {
   item: Item;
-  pathname: string;
-  setPathname: (path: string) => void;
+  setItemActive: () => void;
   SidebarMenuItem: RequiredComponents["SidebarMenuItem"];
   SidebarMenuButton: RequiredComponents["SidebarMenuButton"];
 }) {
@@ -168,11 +217,11 @@ function SidebarItem({
     <SidebarMenuItem>
       <SidebarMenuButton
         asChild
-        isActive={pathname === item.url}
+        isActive={item.isActive}
         suppressHydrationWarning
         onClick={() => {
           window.history.pushState(item.title, item.title, item.url);
-          setPathname(item.url);
+          setItemActive();
         }}
         className="cursor-pointer select-none"
       >
