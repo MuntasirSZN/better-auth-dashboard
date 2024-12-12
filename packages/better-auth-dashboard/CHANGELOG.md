@@ -1,5 +1,17 @@
 # better-auth-dashboard
 
+## 0.0.4
+
+### Patch Changes
+
+- update: readme
+
+## 0.0.3
+
+### Patch Changes
+
+- update: readme & packagejson
+
 ## 0.0.2
 
 ### Patch Changes
