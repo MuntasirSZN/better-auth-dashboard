@@ -63,10 +63,11 @@ export const AppSidebar = memo(
                       setItemActive={() => {
                         setItems((z) => {
                           const currentActive = items.find((x) => x.isActive)!;
+                          const arr = [...z];
 
-                          z[z.indexOf(currentActive)].isActive = false;
-                          z[z.indexOf(item)].isActive = true;
-                          return z;
+                          arr[z.indexOf(currentActive)].isActive = false;
+                          arr[z.indexOf(item)].isActive = true;
+                          return arr;
                         });
                       }}
                     />
