@@ -8,7 +8,6 @@ export const users: () => Plugin = () => {
     icon: UsersIcon,
     title: "Users",
     slug: "users",
-    subItems: [],
     component: component,
   };
 };
