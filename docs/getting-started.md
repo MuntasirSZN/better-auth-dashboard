@@ -25,7 +25,7 @@ export const auth = betterAuth({
 
 ## Configuring your middleware
 
-We support route protection, by using our `dashboardMiddleware` function in combination with the `dashboardMather` we can allow you to configure and protect routes straight from the dashboard.
+We support route protection, by using our `dashboardMiddleware` function we allow you to configure and protect routes straight from the dashboard.
 
 ```ts
 //...
