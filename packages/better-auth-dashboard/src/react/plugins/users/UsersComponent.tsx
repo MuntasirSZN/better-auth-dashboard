@@ -72,8 +72,8 @@ function UsersTable({ components }: { components: RequiredComponents }) {
         </TableHeader>
         <TableBody>
           {users.map((user) => (
-            <TableRow>
-              <TableCell className="flex justify-center">
+            <TableRow key={user.id}>
+              <TableCell className="flex items-center gap-2">
                 <UserPFP image={user.image} />
                 {user.email}
               </TableCell>
@@ -93,5 +93,5 @@ function UsersTable({ components }: { components: RequiredComponents }) {
 }
 
 function UserPFP({ image }: { image: string | null | undefined }) {
-  return image ? <img src={image} /> : null;
+  return image ? <img src={image} width={32} height={32} className="rounded-full" /> : null;
 }
