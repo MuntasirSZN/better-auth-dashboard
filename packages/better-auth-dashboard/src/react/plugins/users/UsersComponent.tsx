@@ -16,22 +16,31 @@ const authClient = createAuthClient({
   plugins: [adminClient()],
 });
 
+const DEFAULT_LOADED_USERS_COUNT = 10;
+
 export const UsersComponent = memo(
   ({ components }: { components: RequiredComponents }) => {
     const { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } =
       components;
     const [open, setOpen] = useState(false);
     const selectedUser = useRef<User | null>(null);
+    const [pagination, setPagination] = useState(0);
 
     return (
-      <div className="flex justify-center w-full h-full sm:pt-[100px]">
-        <div className="sm:min-w-[800px] max-w-[800px] w-full h-full overflow-hidden p-5">
+      <div className="flex justify-center w-full h-full overflow-y-auto">
+        <div className=" max-w-[800px] w-full h-full p-5 ">
           <Sheet open={open} onOpenChange={setOpen}>
             <UsersNavigation components={components} />
             <UsersTable
               components={components}
               selectedUser={selectedUser}
               setOpen={setOpen}
+              pagination={pagination}
+            />
+            <PaginationUI
+              components={components}
+              setPagination={setPagination}
+              pagination={pagination}
             />
             <SheetContent className="min-w-[300px] md:min-w-[800px]">
               <SheetHeader className="relative">
@@ -58,6 +67,44 @@ export const UsersComponent = memo(
   }
 );
 
+function PaginationUI({
+  components,
+  setPagination,
+  pagination,
+}: {
+  components: RequiredComponents;
+  setPagination: Dispatch<SetStateAction<number>>;
+  pagination: number;
+}) {
+  const { Button } = components;
+  return (
+    <div className="w-full mt-10 h-[100px] flex">
+      <Button
+        // @ts-expect-error - intentional
+        variant="outline"
+        disabled={pagination === 0 ? true : false}
+        onClick={() => {
+          if (pagination === 0) return;
+          setPagination((x) => x - DEFAULT_LOADED_USERS_COUNT);
+        }}
+      >
+        Previous
+      </Button>
+      <div className="flex items-start justify-end w-full">
+        <Button
+          // @ts-expect-error - intentional
+          variant="outline"
+          onClick={() => {
+            setPagination((x) => x + DEFAULT_LOADED_USERS_COUNT);
+          }}
+        >
+          Next
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 function UsersNavigation({ components }: { components: RequiredComponents }) {
   const {
     Input,
@@ -77,9 +124,9 @@ function UsersNavigation({ components }: { components: RequiredComponents }) {
     DialogFooter,
   } = components;
   return (
-    <div className="flex flex-col w-full gap-2 mb-5 sm:flex-row">
+    <div className="sticky top-0 py-5 z-10 flex flex-col w-full gap-2 mb-5 sm:flex-row bg-background sm:mt-[100px]">
       <Dialog>
-        <Input placeholder="Search for users" className="sm:w-[500px]" />
+        <Input placeholder="Search for users" className="lg:w-[500px]" />
         <Select>
           <SelectTrigger className="min-w-[190px] w-[190px]">
             <SelectValue placeholder="Sort By" />
@@ -137,22 +184,31 @@ function UsersTable({
   components,
   setOpen,
   selectedUser,
+  pagination,
 }: {
   components: RequiredComponents;
   selectedUser: MutableRefObject<User | null>;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  pagination: number;
 }) {
-  const { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } =
-    components;
+  const {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+    TableCaption,
+  } = components;
 
   const [users, setusers] = useState<User[]>([]);
-  const [pagination, setPagination] = useState(0);
 
   useEffect(() => {
+    console.log(`Getting users with pag: ${pagination}`);
     authClient.admin
       .listUsers({
         query: {
-          limit: 50,
+          limit: DEFAULT_LOADED_USERS_COUNT,
           offset: pagination,
         },
       })
@@ -167,46 +223,45 @@ function UsersTable({
   }, [pagination]);
 
   return (
-    <div className="overflow-y-auto">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>User</TableHead>
-            <TableHead className="text-right">Name</TableHead>
-            <TableHead className="hidden text-right md:table-cell">
-              Updated at
-            </TableHead>
-            <TableHead className="hidden text-right md:table-cell">
-              Joined at
-            </TableHead>
+    <Table>
+      <TableCaption>{users.length} / {DEFAULT_LOADED_USERS_COUNT}</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead>User</TableHead>
+          <TableHead className="text-right">Name</TableHead>
+          <TableHead className="hidden text-right md:table-cell">
+            Updated at
+          </TableHead>
+          <TableHead className="hidden text-right md:table-cell">
+            Joined at
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {users.map((user) => (
+          <TableRow
+            key={user.id}
+            className="cursor-pointer"
+            onClick={() => {
+              selectedUser.current = user;
+              setOpen(true);
+            }}
+          >
+            <TableCell className="flex items-center gap-2">
+              <UserPFP image={user.image} />
+              {user.email}
+            </TableCell>
+            <TableCell className="text-right">{user.name}</TableCell>
+            <TableCell className="hidden text-right md:table-cell">
+              {user.updatedAt.toDateString()}
+            </TableCell>
+            <TableCell className="hidden text-right md:table-cell">
+              {user.createdAt.toDateString()}
+            </TableCell>
           </TableRow>
-        </TableHeader>
-        <TableBody>
-          {users.map((user) => (
-            <TableRow
-              key={user.id}
-              className="cursor-pointer"
-              onClick={() => {
-                selectedUser.current = user;
-                setOpen(true);
-              }}
-            >
-              <TableCell className="flex items-center gap-2">
-                <UserPFP image={user.image} />
-                {user.email}
-              </TableCell>
-              <TableCell className="text-right">{user.name}</TableCell>
-              <TableCell className="hidden text-right md:table-cell">
-                {user.updatedAt.toDateString()}
-              </TableCell>
-              <TableCell className="hidden text-right md:table-cell">
-                {user.createdAt.toDateString()}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+        ))}
+      </TableBody>
+    </Table>
   );
 }
 
