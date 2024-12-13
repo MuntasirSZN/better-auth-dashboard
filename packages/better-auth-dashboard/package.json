@@ -46,6 +46,7 @@
   "devDependencies": {
     "@eslint/js": "^9.16.0",
     "@radix-ui/react-collapsible": "^1.1.1",
+    "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.1.4",
     "@types/node": "^20",
     "@types/react": "18.3.1",
@@ -61,6 +62,7 @@
   },
   "peerDependencies": {
     "@radix-ui/react-collapsible": "^1.1.1",
+    "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.1.4",
     "better-fetch": "^1.1.2",
     "next": "^15.0.0"

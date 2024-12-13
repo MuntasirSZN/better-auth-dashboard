@@ -1,6 +1,7 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as CollapsiblePrimitive from "@radix-ui/react-collapsible";
 import type { forwardRef } from "react";
+import * as SheetPrimitive from "@radix-ui/react-dialog";
 
 type ShadCNComponent<T1, T2> = ReturnType<typeof forwardRef<T1, T2>>;
 
@@ -118,7 +119,49 @@ type TableCaption = ShadCNComponent<
   React.HTMLAttributes<HTMLTableCaptionElement>
 >;
 
+type Sheet = typeof SheetPrimitive.Root;
+
+type SheetTrigger = typeof SheetPrimitive.Trigger;
+
+type SheetClose = typeof SheetPrimitive.Close;
+
+type SheetPortal = typeof SheetPrimitive.Portal;
+
+type SheetOverlay = ShadCNComponent<
+  React.ElementRef<typeof SheetPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
+>;
+
+type SheetContent = ShadCNComponent<
+  React.ElementRef<typeof SheetPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>
+>;
+
+type SheetHeader = (props: React.HTMLAttributes<HTMLDivElement>) => JSX.Element;
+
+type SheetFooter = (props: React.HTMLAttributes<HTMLDivElement>) => JSX.Element;
+
+type SheetTitle = ShadCNComponent<
+  React.ElementRef<typeof SheetPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
+>;
+
+type SheetDescription = ShadCNComponent<
+  React.ElementRef<typeof SheetPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
+>;
+
 export type RequiredComponents = {
+  Sheet: Sheet;
+  SheetTrigger: SheetTrigger;
+  SheetClose: SheetClose;
+  SheetPortal: SheetPortal;
+  SheetOverlay: SheetOverlay;
+  SheetContent: SheetContent;
+  SheetHeader: SheetHeader;
+  SheetFooter: SheetFooter;
+  SheetTitle: SheetTitle;
+  SheetDescription: SheetDescription;
   SidebarProvider: SidebarProvider;
   Sidebar: Sidebar;
   SidebarContent: SidebarContent;

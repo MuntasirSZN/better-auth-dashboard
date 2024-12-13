@@ -1,6 +1,14 @@
 import { createAuthClient } from "better-auth/react";
 import { adminClient } from "better-auth/client/plugins";
-import { memo, useEffect, useState } from "react";
+import {
+  memo,
+  useEffect,
+  useRef,
+  useState,
+  type Dispatch,
+  type MutableRefObject,
+  type SetStateAction,
+} from "react";
 import type { RequiredComponents } from "../../types";
 import type { User } from "better-auth";
 
@@ -10,12 +18,41 @@ const authClient = createAuthClient({
 
 export const UsersComponent = memo(
   ({ components }: { components: RequiredComponents }) => {
-    const { Input } = components;
+    const {
+      Input,
+      Sheet,
+      SheetContent,
+      SheetDescription,
+      SheetHeader,
+      SheetTitle,
+    } = components;
+    const [open, setOpen] = useState(false);
+    const sheetTitle = useRef<string>("");
+    const sheetDescription = useRef<string>("");
+    const sheetBody = useRef<string>("");
+
     return (
       <div className="flex justify-center w-full h-full pt-[100px]">
         <div className="md:min-w-[800px] h-full overflow-hidden p-2">
-          <UsersNavigation Input={Input} />
-          <UsersTable components={components} />
+          <Sheet open={open} onOpenChange={setOpen}>
+            <UsersNavigation Input={Input} />
+            <UsersTable
+              components={components}
+              sheetDescription={sheetDescription}
+              sheetTitle={sheetTitle}
+              setOpen={setOpen}
+              sheetBody={sheetBody}
+            />
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle>{sheetTitle.current}</SheetTitle>
+                <SheetDescription>{sheetDescription.current}</SheetDescription>
+              </SheetHeader>
+              <div className="w-[500px] my-5">
+                <pre>{sheetBody.current}</pre>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     );
@@ -30,7 +67,19 @@ function UsersNavigation({ Input }: { Input: RequiredComponents["Input"] }) {
   );
 }
 
-function UsersTable({ components }: { components: RequiredComponents }) {
+function UsersTable({
+  components,
+  setOpen,
+  sheetDescription,
+  sheetTitle,
+  sheetBody,
+}: {
+  components: RequiredComponents;
+  sheetTitle: MutableRefObject<string>;
+  sheetDescription: MutableRefObject<string>;
+  sheetBody: MutableRefObject<string>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   const { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } =
     components;
 
@@ -72,7 +121,16 @@ function UsersTable({ components }: { components: RequiredComponents }) {
         </TableHeader>
         <TableBody>
           {users.map((user) => (
-            <TableRow key={user.id}>
+            <TableRow
+              key={user.id}
+              className="cursor-pointer"
+              onClick={() => {
+                sheetTitle.current = `${user.name}`;
+                sheetDescription.current = `${user.email}`;
+                sheetBody.current = JSON.stringify(user, null, 2);
+                setOpen(true);
+              }}
+            >
               <TableCell className="flex items-center gap-2">
                 <UserPFP image={user.image} />
                 {user.email}
@@ -93,5 +151,7 @@ function UsersTable({ components }: { components: RequiredComponents }) {
 }
 
 function UserPFP({ image }: { image: string | null | undefined }) {
-  return image ? <img src={image} width={32} height={32} className="rounded-full" /> : null;
+  return image ? (
+    <img src={image} width={32} height={32} className="rounded-full" />
+  ) : null;
 }

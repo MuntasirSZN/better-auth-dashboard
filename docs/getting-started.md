@@ -55,7 +55,7 @@ npx shadcn@latest init -d
 Then, install the required components:
 
 ```bash
-npx shadcn@latest add sidebar collapsible table
+npx shadcn@latest add sidebar collapsible table sheet
 ```
 
 Lastly, we recommend you to create an `index.ts` file in the shadcn generated components folder, and export each component straight in the `index.ts` file.
