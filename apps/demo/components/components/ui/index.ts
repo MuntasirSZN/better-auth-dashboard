@@ -10,3 +10,9 @@ export * from "./tooltip";
 export * from "./collapsible";
 // From table
 export * from "./table";
+// From select
+export * from "./select";
+// From dialog
+export * from "./dialog";
+// From label
+export * from "./label";
