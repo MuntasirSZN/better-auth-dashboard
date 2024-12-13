@@ -8,6 +8,10 @@ export const user = sqliteTable("user", {
   image: text("image"),
   createdAt: integer("createdAt", { mode: "timestamp" }).notNull(),
   updatedAt: integer("updatedAt", { mode: "timestamp" }).notNull(),
+  role: text("role"),
+  banned: integer("banned", { mode: "boolean" }),
+  banReason: text("banReason"),
+  banExpires: integer("banExpires", { mode: "timestamp" }),
 });
 
 export const session = sqliteTable("session", {
@@ -21,6 +25,7 @@ export const session = sqliteTable("session", {
   userId: text("userId")
     .notNull()
     .references(() => user.id),
+  impersonatedBy: text("impersonatedBy"),
 });
 
 export const account = sqliteTable("account", {
@@ -57,12 +62,6 @@ export const routeProtection = sqliteTable("routeProtection", {
   route: text("route").notNull().unique(),
   isRoleProtected: integer("isRoleProtected", { mode: "boolean" }).notNull(),
   roleProtection: text("roleProtection").notNull(),
-  isAccAgeProtected: integer("isAccAgeProtected", {
-    mode: "boolean",
-  }).notNull(),
-  accAgeProtection: integer("accAgeProtection", {
-    mode: "timestamp",
-  }).notNull(),
   isAuthenticatedProtected: integer("isAuthenticatedProtected", {
     mode: "boolean",
   }).notNull(),
