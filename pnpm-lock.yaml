@@ -72,6 +72,9 @@ importers:
       drizzle-orm:
         specifier: ^0.38.0
         version: 0.38.0(@libsql/client@0.14.0)(@types/better-sqlite3@7.6.12)(@types/react@18.3.1)(better-sqlite3@11.7.0)(kysely@0.27.5)(react@19.0.0)
+      humannames:
+        specifier: ^1.0.5
+        version: 1.0.5
       lucide-react:
         specifier: ^0.468.0
         version: 0.468.0(react@19.0.0)
@@ -2382,6 +2385,9 @@ packages:
 
   human-id@1.0.2:
     resolution: {integrity: sha512-UNopramDEhHJD+VR+ehk8rOslwSfByxPIZyJRfV739NDhN5LF1fa1MqnzKm2lGTQRjNrjK19Q5fhkgIfjlVUKw==}
+
+  humannames@1.0.5:
+    resolution: {integrity: sha512-FArOOhsfu1Rzc6wj8TZWTEpO/+TQOqhU0YNx+IyRaScE7HVanOwn8knN1OjjUngJOLaRqFSLjX0EzvMiNnT7zw==}
 
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
@@ -5303,6 +5309,8 @@ snapshots:
       function-bind: 1.1.2
 
   human-id@1.0.2: {}
+
+  humannames@1.0.5: {}
 
   iconv-lite@0.4.24:
     dependencies:
