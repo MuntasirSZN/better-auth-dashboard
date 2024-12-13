@@ -49,7 +49,8 @@ function UsersTable({ components }: { components: RequiredComponents }) {
         if (result.data) {
           setusers(result.data.users);
         } else {
-          throw result.error;
+          console.error(`Failed to fetch list of users:`, result.error);
+          throw `${result.error.status} ${result.error.code}: ${result.error.statusText}. ${result.error.message}`;
         }
       });
   }, [pagination]);
@@ -60,9 +61,13 @@ function UsersTable({ components }: { components: RequiredComponents }) {
         <TableHeader>
           <TableRow>
             <TableHead>User</TableHead>
-            <TableHead className="text-right">Username</TableHead>
-            <TableHead className="hidden text-right md:table-cell">Last Sign in</TableHead>
-            <TableHead className="hidden text-right md:table-cell">Joined at</TableHead>
+            <TableHead className="text-right">Name</TableHead>
+            <TableHead className="hidden text-right md:table-cell">
+              Updated at
+            </TableHead>
+            <TableHead className="hidden text-right md:table-cell">
+              Joined at
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -72,9 +77,13 @@ function UsersTable({ components }: { components: RequiredComponents }) {
                 <UserPFP image={user.image} />
                 {user.email}
               </TableCell>
-              <TableCell className="text-right">Paid</TableCell>
-              <TableCell className="hidden text-right md:table-cell">Credit Card</TableCell>
-              <TableCell className="hidden text-right md:table-cell">$250.00</TableCell>
+              <TableCell className="text-right">{user.name}</TableCell>
+              <TableCell className="hidden text-right md:table-cell">
+                {user.updatedAt.toDateString()}
+              </TableCell>
+              <TableCell className="hidden text-right md:table-cell">
+                {user.createdAt.toDateString()}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
