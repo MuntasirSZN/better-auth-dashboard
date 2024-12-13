@@ -1,9 +1,10 @@
 import type { LucideProps } from "lucide-react";
 import type {
   ForwardRefExoticComponent,
-  ReactNode,
+  MemoExoticComponent,
   RefAttributes,
 } from "react";
+import type { RequiredComponents } from "./components";
 
 export type Plugin = {
   title: string;
@@ -19,5 +20,7 @@ export type Plugin = {
   //   >;
   //   component: () => ReactNode;
   // }[];
-  component: () => ReactNode;
+  component: MemoExoticComponent<
+    ({ components }: { components: RequiredComponents }) => JSX.Element
+  >;
 };

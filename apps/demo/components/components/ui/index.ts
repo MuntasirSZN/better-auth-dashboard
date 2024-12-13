@@ -8,3 +8,5 @@ export * from "./skeleton";
 export * from "./tooltip";
 // From collapsible
 export * from "./collapsible";
+// From table
+export * from "./table";

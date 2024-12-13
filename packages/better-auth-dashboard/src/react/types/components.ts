@@ -76,6 +76,48 @@ type Collapsible = typeof CollapsiblePrimitive.Collapsible;
 type CollapsibleTrigger = typeof CollapsiblePrimitive.CollapsibleTrigger;
 type CollapsibleContent = typeof CollapsiblePrimitive.CollapsibleContent;
 
+type Input = ShadCNComponent<HTMLInputElement, React.ComponentProps<"input">>;
+
+type Table = ShadCNComponent<
+  HTMLTableElement,
+  React.HTMLAttributes<HTMLTableElement>
+>;
+
+type TableHeader = ShadCNComponent<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>;
+
+type TableBody = ShadCNComponent<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>;
+
+type TableFooter = ShadCNComponent<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>;
+
+type TableRow = ShadCNComponent<
+  HTMLTableRowElement,
+  React.HTMLAttributes<HTMLTableRowElement>
+>;
+
+type TableHead = ShadCNComponent<
+  HTMLTableCellElement,
+  React.ThHTMLAttributes<HTMLTableCellElement>
+>;
+
+type TableCell = ShadCNComponent<
+  HTMLTableCellElement,
+  React.TdHTMLAttributes<HTMLTableCellElement>
+>;
+
+type TableCaption = ShadCNComponent<
+  HTMLTableCaptionElement,
+  React.HTMLAttributes<HTMLTableCaptionElement>
+>;
+
 export type RequiredComponents = {
   SidebarProvider: SidebarProvider;
   Sidebar: Sidebar;
@@ -90,4 +132,13 @@ export type RequiredComponents = {
   Collapsible: Collapsible;
   CollapsibleTrigger: CollapsibleTrigger;
   CollapsibleContent: CollapsibleContent;
+  Input: Input;
+  Table: Table;
+  TableHeader: TableHeader;
+  TableHead: TableHead;
+  TableBody: TableBody;
+  TableFooter: TableFooter;
+  TableRow: TableRow;
+  TableCell: TableCell;
+  TableCaption: TableCaption;
 };

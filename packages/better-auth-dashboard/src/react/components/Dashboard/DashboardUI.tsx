@@ -35,7 +35,7 @@ export const DashboardUI = memo(
         url: `${path}/${x.slug}`,
         isActive: false,
         icon: x.icon,
-        component: x.component,
+        component: () => <x.component components={components} />,
       })),
       // {
       //   title: "Settings",
@@ -58,7 +58,7 @@ export const DashboardUI = memo(
     return (
       <>
         <AppSidebar components={components} setItems={setItems} items={items} />
-        <main className="w-full h-screen p-10 relatvie">
+        <main className="w-full h-screen relatvie">
           <components.SidebarTrigger className="absolute -ml-8 bottom-1" />
           {items.find((x) => x.isActive)?.component()}
         </main>

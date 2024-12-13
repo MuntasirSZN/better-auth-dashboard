@@ -1,13 +1,12 @@
 import { Users as UsersIcon } from "lucide-react";
 import type { Plugin } from "../../types";
+import { UsersComponent } from "./UsersComponent";
 
 export const users: () => Plugin = () => {
-  const component = () => <div>Hello from users plugin!</div>;
-
   return {
     icon: UsersIcon,
     title: "Users",
     slug: "users",
-    component: component,
+    component: UsersComponent,
   };
 };
