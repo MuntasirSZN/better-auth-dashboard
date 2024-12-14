@@ -20,17 +20,17 @@
   },
   "exports": {
     "./react": {
-      "types": "./dist/react/index.d.ts",
+      "types": "./src/react/index.ts",
       "import": "./dist/react/index.js",
       "require": "./dist/react/index.js"
     },
     "./next": {
-      "types": "./dist/next/index.d.ts",
+      "types": "./src/next/index.ts",
       "import": "./dist/next/index.js",
       "require": "./dist/next/index.js"
     },
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./src/index.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.js"
     }

@@ -70,10 +70,8 @@ type TooltipContent = ShadCNComponent<
 >;
 
 type SidebarTrigger = ShadCNComponent<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  React.ElementRef<any>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  React.ComponentProps<any>
+  React.ElementRef<Button>,
+  React.ComponentProps<Button>
 >;
 
 type Collapsible = typeof CollapsiblePrimitive.Collapsible;
