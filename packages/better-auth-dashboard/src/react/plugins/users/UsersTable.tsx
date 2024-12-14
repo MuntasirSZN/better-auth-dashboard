@@ -78,14 +78,18 @@ export function UsersTable({
         {users.map((user) => (
           <TableRow
             key={user.id}
-            className="cursor-pointer"
+            className="duration-300 cursor-pointer animate-in fade-in"
             onClick={() => {
               selectedUser.current = user;
               setOpen(true);
             }}
           >
             <TableCell className="flex items-center gap-2">
-              <UserPFP image={user.image} />
+              <UserPFP
+                image={user.image}
+                name={user.name}
+                components={components}
+              />
               {user.email}
             </TableCell>
             <TableCell className="text-right">{user.name}</TableCell>

@@ -1,3 +1,4 @@
+import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
@@ -241,7 +242,25 @@ type Label = ShadCNComponent<
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
 >;
 
+type Avatar = ShadCNComponent<
+  React.ElementRef<typeof AvatarPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
+>;
+
+type AvatarImage = ShadCNComponent<
+  React.ElementRef<typeof AvatarPrimitive.Image>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
+>;
+
+type AvatarFallback = ShadCNComponent<
+  React.ElementRef<typeof AvatarPrimitive.Fallback>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
+>;
+
 export type RequiredComponents = {
+  Avatar: Avatar;
+  AvatarImage: AvatarImage;
+  AvatarFallback: AvatarFallback;
   Label: Label;
   Dialog: Dialog;
   DialogPortal: DialogPortal;

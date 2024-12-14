@@ -16,3 +16,5 @@ export * from "./select";
 export * from "./dialog";
 // From label
 export * from "./label";
+// From avatar
+export * from "./avatar";

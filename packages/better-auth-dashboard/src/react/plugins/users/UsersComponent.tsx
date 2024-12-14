@@ -6,7 +6,7 @@ import type { User } from "better-auth";
 import { PaginationUI } from "./PaginationUI";
 import { UsersNavigation } from "./UsersNavigation";
 import { UsersTable } from "./UsersTable";
-import { UserPFP } from "./UserPFP";
+import { UserView } from "./UserView";
 
 const authClient = createAuthClient({
   plugins: [adminClient()],
@@ -16,8 +16,7 @@ export type AuthClient = typeof authClient;
 
 export const UsersComponent = memo(
   ({ components }: { components: RequiredComponents }) => {
-    const { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } =
-      components;
+    const { Sheet, SheetContent } = components;
     const [open, setOpen] = useState(false);
     const selectedUser = useRef<User | null>(null);
     const [pagination, setPagination] = useState(0);
@@ -51,22 +50,7 @@ export const UsersComponent = memo(
               limit={limit}
             />
             <SheetContent className="min-w-[300px] md:min-w-[800px]">
-              <SheetHeader className="relative">
-                <UserPFP
-                  image={selectedUser.current?.image}
-                  size="lg"
-                  className="absolute inset-0"
-                />
-                <SheetTitle className="ml-20">
-                  {selectedUser.current?.name}
-                </SheetTitle>
-                <SheetDescription className="ml-20 !mt-0">
-                  {selectedUser.current?.email}
-                </SheetDescription>
-              </SheetHeader>
-              <div className="w-[500px] my-5">
-                <pre>{JSON.stringify(selectedUser.current, null, 2)}</pre>
-              </div>
+              <UserView components={components} selectedUser={selectedUser} />
             </SheetContent>
           </Sheet>
         </div>

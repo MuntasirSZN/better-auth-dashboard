@@ -1,18 +1,37 @@
+import type { RequiredComponents } from "../../types";
+
 export function UserPFP({
+  components,
   image,
   size = "sm",
+  name,
   className,
 }: {
+  components: RequiredComponents;
   image: string | null | undefined;
+  name: string | null | undefined;
   size?: "sm" | "lg";
-  className?: string;
+  className?: {
+    image?: string;
+    wrapper?: string;
+  };
 }) {
-  return image ? (
-    <img
-      src={image}
-      width={size === "sm" ? 32 : 64}
-      height={size === "sm" ? 32 : 64}
-      className={"rounded-full" + (className ? ` ${className}` : "")}
-    />
+  const { Avatar, AvatarFallback, AvatarImage } = components;
+  return image && name ? (
+    <Avatar
+      className={className?.wrapper}
+      style={{
+        width: size === "sm" ? 32 : 64,
+        height: size === "sm" ? 32 : 64,
+      }}
+    >
+      <AvatarImage
+        width={size === "sm" ? 32 : 64}
+        height={size === "sm" ? 32 : 64}
+        src={image}
+        className={className?.image}
+      />
+      <AvatarFallback>{name}</AvatarFallback>
+    </Avatar>
   ) : null;
 }
