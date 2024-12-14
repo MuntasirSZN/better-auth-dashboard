@@ -1,13 +1,23 @@
 import { Building2 } from "lucide-react";
-import type { Plugin } from "../../types";
+import type { Plugin, RequiredComponents } from "../../types";
+import { memo } from "react";
 
 export const organizations: () => Plugin = () => {
-  const component = () => <div>Hello from orgs plugin!</div>;
-
   return {
     icon: Building2,
     title: "Organizations",
     slug: "organizations",
-    component,
+    component: OrgComponent,
   };
 };
+
+const OrgComponent = memo(
+  ({ components }: { components: RequiredComponents }) => {
+    return (
+      <div>
+        hello from orgs plugin!
+        <components.Button>Hello!</components.Button>
+      </div>
+    );
+  }
+);
