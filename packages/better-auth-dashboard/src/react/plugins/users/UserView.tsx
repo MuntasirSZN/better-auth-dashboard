@@ -16,13 +16,14 @@ export function UserView({
     SheetDescription,
     Table,
     TableBody,
-    TableCell,
+    // TableCell,
     TableHead,
     TableHeader,
     TableRow,
     TableCaption,
   } = components;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [tableContent, setTableContent] = useState(selectedUser.current ?? {});
 
   return (
@@ -53,7 +54,7 @@ export function UserView({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {Object.values(tableContent).map((vals, i) => {
+            {/* {Object.values(tableContent).map((vals, i) => {
               <TableRow key={i}>
                 <TableCell className="flex items-center gap-2">
                   <UserPFP
@@ -71,7 +72,7 @@ export function UserView({
                   {user.createdAt.toDateString()}
                 </TableCell>
               </TableRow>;
-            })}
+            })} */}
           </TableBody>
         </Table>
       </div>
