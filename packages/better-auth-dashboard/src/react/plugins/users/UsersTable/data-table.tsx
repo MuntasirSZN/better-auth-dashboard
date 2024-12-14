@@ -58,8 +58,12 @@ export function DataTable<TData, TValue>({
   const tableContainerRef = React.useRef<HTMLDivElement>(null);
   const [tableMeasures, setTableMeasures] = React.useState<number[]>([]);
 
+  const initialLoadFetched = React.useRef(false);
+
   // Initial load
   React.useEffect(() => {
+    if(initialLoadFetched.current === true) return;
+    initialLoadFetched.current = true;
     onPaginationChange(0, pageSize);
   }, []);
 

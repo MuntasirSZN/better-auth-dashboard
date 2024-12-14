@@ -25,9 +25,13 @@ export const UsersComponent = memo(
     const [searchValue, setSearchValue] = useState<string>("");
 
     // Function to fetch users
-    const fetchUsers = async (pageIndex: number, pageSize: number) => {
+    const fetchUsers = async (
+      pageIndex: number,
+      pageSize: number,
+      searchValueOverride?: string
+    ) => {
       setIsLoading(true);
-      console.log(`loading... ${searchValue}`)
+      console.log(`loading... ${searchValue}`);
       try {
         const result = await authClient.admin.listUsers({
           query: {
@@ -35,6 +39,9 @@ export const UsersComponent = memo(
             offset: pageIndex * pageSize,
             ...(searchValue.trim().length > 0
               ? { searchValue: searchValue }
+              : {}),
+            ...(searchValueOverride && searchValueOverride.trim().length > 0
+              ? { searchValue: searchValueOverride }
               : {}),
           },
         });
@@ -64,11 +71,11 @@ export const UsersComponent = memo(
 
     // Handle search
     const handleSearch = useCallback((value: string) => {
-      console.log(`Searching for users: ${value}`)
+      console.log(`Searching for users: ${value}`);
       setSearchValue(value);
       setUsers([]); // Clear existing users
       setHasMore(true); // Reset hasMore state
-      fetchUsers(0, 10); // Fetch first page with new search
+      fetchUsers(0, 10, value); // Fetch first page with new search
     }, []);
 
     return (
