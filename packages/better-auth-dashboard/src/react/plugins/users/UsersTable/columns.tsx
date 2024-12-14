@@ -9,7 +9,6 @@ import type { RequiredComponents } from "../../../types";
 import { UserPFP } from "../UserPFP";
 import type { User } from "../UsersComponent";
 
-
 export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
   components
 ) => {
@@ -56,7 +55,9 @@ export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
         };
       },
       filterFn: (row, _id, filterValue) => {
-        return row.original.name.toLowerCase().includes(filterValue.toLowerCase());
+        return row.original.name
+          .toLowerCase()
+          .includes(filterValue.toLowerCase());
       },
       cell: ({ getValue }) => {
         const { name, image } = getValue() as {
@@ -65,7 +66,17 @@ export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
         };
         return (
           <div className="w-[150px] flex gap-2 items-center justify-start">
-            <UserPFP components={components} image={image} name={name} />
+            <UserPFP
+              components={components}
+              image={image}
+              name={
+                name.includes(" ") && name.length >= 3
+                  ? `${name.split(" ")[0].charAt(0).toUpperCase()} ${name.split(" ")[1].charAt(0).toUpperCase()}`
+                  : name.length >= 2
+                    ? `${name.charAt(0).toUpperCase()}${name.charAt(1).toUpperCase()}`
+                    : `${name.charAt(0).toUpperCase()}`
+              }
+            />
             {name}
           </div>
         );
