@@ -56,7 +56,7 @@ export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
         };
       },
       filterFn: (row, _id, filterValue) => {
-        return row.original.name.toLowerCase().includes(filterValue);
+        return row.original.name.toLowerCase().includes(filterValue.toLowerCase());
       },
       cell: ({ getValue }) => {
         const { name, image } = getValue() as {
@@ -74,7 +74,7 @@ export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
       enableHiding: false,
     },
     {
-      accessorKey: "email",
+      id: "email",
       header: ({ column }) => (
         <DataTableColumnHeader
           components={components}

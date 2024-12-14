@@ -30,7 +30,7 @@ export function DataTableViewOptions<TData>({
           // @ts-expect-error - Intentional
           variant="outline"
           size="sm"
-          className="hidden h-8 ml-auto lg:flex"
+          // className="hidden h-8 ml-auto lg:flex"
         >
           <Settings2 />
           View
