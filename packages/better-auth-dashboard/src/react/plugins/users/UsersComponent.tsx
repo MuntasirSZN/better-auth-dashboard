@@ -224,7 +224,10 @@ function UsersTable({
 
   return (
     <Table>
-      <TableCaption>{users.length} / {DEFAULT_LOADED_USERS_COUNT}</TableCaption>
+      <TableCaption>
+        Page {pagination / DEFAULT_LOADED_USERS_COUNT + 1} ({users.length} /{" "}
+        {DEFAULT_LOADED_USERS_COUNT})
+      </TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead>User</TableHead>
