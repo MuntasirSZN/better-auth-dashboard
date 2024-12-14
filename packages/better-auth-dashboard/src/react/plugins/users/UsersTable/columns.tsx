@@ -131,37 +131,33 @@ export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
         return value.includes(row.getValue(id));
       },
     },
-    // {
-    //   accessorKey: "priority",
-    //   header: ({ column }) => (
-    //     <DataTableColumnHeader
-    //       components={components}
-    //       column={column}
-    //       title="Priority"
-    //     />
-    //   ),
-    //   cell: ({ row }) => {
-    //     const priority = priorities.find(
-    //       (priority) => priority.value === row.getValue("priority")
-    //     );
+    {
+      accessorKey: "createdAt",
+      header: ({ column }) => (
+        <DataTableColumnHeader
+          components={components}
+          column={column}
+          title="Created At"
+        />
+      ),
+      accessorFn: (originalRow) => {
+        return {
+          createdAt: originalRow.createdAt,
+        };
+      },
+      cell: ({ getValue }) => {
+        const { createdAt } = getValue() as {
+          createdAt: Date;
+        };
 
-    //     if (!priority) {
-    //       return null;
-    //     }
-
-    //     return (
-    //       <div className="flex items-center">
-    //         {priority.icon && (
-    //           <priority.icon className="w-4 h-4 mr-2 text-muted-foreground" />
-    //         )}
-    //         <span>{priority.label}</span>
-    //       </div>
-    //     );
-    //   },
-    //   filterFn: (row, id, value) => {
-    //     return value.includes(row.getValue(id));
-    //   },
-    // },
+        return (
+          <div className="flex items-center">{createdAt.toDateString()}</div>
+        );
+      },
+      filterFn: (row, id, value) => {
+        return value.includes(row.getValue(id));
+      },
+    },
     {
       id: "actions",
       cell: ({ row }) => (
