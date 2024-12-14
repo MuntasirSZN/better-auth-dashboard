@@ -11,11 +11,9 @@ import {
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
 import type { RequiredComponents } from "../../../types";
 
@@ -23,15 +21,29 @@ interface DataTableProps<TData, TValue> {
   columns: (components: RequiredComponents) => ColumnDef<TData, TValue>[];
   data: TData[];
   components: RequiredComponents;
+  onPaginationChange: (pageIndex: number, pageSize: number) => Promise<void>;
+  isLoading?: boolean;
+  hasMore?: boolean;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   components,
+  onPaginationChange,
+  isLoading = false,
+  hasMore = true,
 }: DataTableProps<TData, TValue>) {
-  const { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } =
-    components;
+  const {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+    Button,
+  } = components;
+
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -39,6 +51,13 @@ export function DataTable<TData, TValue>({
     []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [pageIndex, setPageIndex] = React.useState(0);
+  const pageSize = 10; // Fixed page size
+
+  // Initial load
+  React.useEffect(() => {
+    onPaginationChange(0, pageSize);
+  }, []);
 
   const columns_ = columns(components);
 
@@ -58,11 +77,16 @@ export function DataTable<TData, TValue>({
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
+
+  const loadMore = () => {
+    const nextPage = pageIndex + 1;
+    setPageIndex(nextPage);
+    onPaginationChange(nextPage, pageSize);
+  };
 
   return (
     <div className="space-y-4">
@@ -117,7 +141,17 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination components={components} table={table} />
+
+      {/* Load More Button */}
+      <div className="flex justify-center mt-4">
+        {isLoading ? (
+          <Button disabled>Loading...</Button>
+        ) : hasMore ? (
+          <Button onClick={loadMore}>Load More</Button>
+        ) : (
+          <Button disabled>No more users</Button>
+        )}
+      </div>
     </div>
   );
 }

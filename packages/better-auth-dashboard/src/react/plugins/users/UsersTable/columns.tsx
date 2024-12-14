@@ -9,6 +9,7 @@ import type { RequiredComponents } from "../../../types";
 import { UserPFP } from "../UserPFP";
 import type { User } from "../UsersComponent";
 
+
 export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
   components
 ) => {
@@ -53,6 +54,9 @@ export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
           image: originalRow.image,
           name: originalRow.name,
         };
+      },
+      filterFn: (row, _id, filterValue) => {
+        return row.original.name.toLowerCase().includes(filterValue);
       },
       cell: ({ getValue }) => {
         const { name, image } = getValue() as {

@@ -20,7 +20,6 @@ export function DataTableToolbar<TData>({
 }: DataTableToolbarProps<TData>) {
   const { Button, Input } = components;
   const isFiltered = table.getState().columnFilters.length > 0;
-
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center flex-1 space-x-2">
