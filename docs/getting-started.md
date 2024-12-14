@@ -55,14 +55,13 @@ npx shadcn@latest init -d
 Then, install the required components:
 
 ```bash
-npx shadcn@latest add sidebar collapsible table sheet select dialog label avatar
+npx shadcn@latest add sidebar collapsible table sheet select dialog label avatar badge checkbox dropdown-menu command popover
 ```
 
 Lastly, we recommend you to create an `index.ts` file in the shadcn generated components folder, and export each component straight in the `index.ts` file.
 Like so:
 
 ```ts
-// From sidebar
 export * from "./button";
 export * from "./input";
 export * from "./separator";
@@ -70,18 +69,18 @@ export * from "./sheet";
 export * from "./sidebar";
 export * from "./skeleton";
 export * from "./tooltip";
-// From collapsible
 export * from "./collapsible";
-// From table
 export * from "./table";
-// From select
 export * from "./select";
-// From dialog
 export * from "./dialog";
-// From label
 export * from "./label";
-// From avatar
 export * from "./avatar";
+export * from "./badge";
+export * from "./checkbox";
+export * from "./dropdown-menu";
+export * from "./command";
+export * from "./popover";
+export * from "./separator";
 ```
 
 ## Creating your dashboard

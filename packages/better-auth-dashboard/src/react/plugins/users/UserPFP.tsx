@@ -21,13 +21,13 @@ export function UserPFP({
     <Avatar
       className={className?.wrapper}
       style={{
-        width: size === "sm" ? 32 : 64,
-        height: size === "sm" ? 32 : 64,
+        width: size === "sm" ? 25 : 64,
+        height: size === "sm" ? 25 : 64,
       }}
     >
       <AvatarImage
-        width={size === "sm" ? 32 : 64}
-        height={size === "sm" ? 32 : 64}
+        width={size === "sm" ? 25 : 64}
+        height={size === "sm" ? 25 : 64}
         src={image}
         className={className?.image}
       />

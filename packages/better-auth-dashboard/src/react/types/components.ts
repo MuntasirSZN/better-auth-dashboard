@@ -1,3 +1,8 @@
+import * as SeparatorPrimitive from "@radix-ui/react-separator";
+import { type DialogProps } from "@radix-ui/react-dialog";
+import { Command as CommandPrimitive } from "cmdk";
+import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import * as LabelPrimitive from "@radix-ui/react-label";
@@ -6,6 +11,7 @@ import * as CollapsiblePrimitive from "@radix-ui/react-collapsible";
 import type { forwardRef } from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import * as SelectPrimitive from "@radix-ui/react-select";
+import * as PopoverPrimitive from "@radix-ui/react-popover";
 
 type ShadCNComponent<T1, T2> = ReturnType<typeof forwardRef<T1, T2>>;
 
@@ -257,7 +263,161 @@ type AvatarFallback = ShadCNComponent<
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
 >;
 
+type Badge = (props: React.HTMLAttributes<HTMLDivElement>) => JSX.Element;
+
+type Checkbox = ShadCNComponent<
+  React.ElementRef<typeof CheckboxPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
+>;
+
+type DropdownMenu = typeof DropdownMenuPrimitive.Root;
+
+type DropdownMenuTrigger = typeof DropdownMenuPrimitive.Trigger;
+
+type DropdownMenuGroup = typeof DropdownMenuPrimitive.Group;
+
+type DropdownMenuPortal = typeof DropdownMenuPrimitive.Portal;
+
+type DropdownMenuSub = typeof DropdownMenuPrimitive.Sub;
+
+type DropdownMenuRadioGroup = typeof DropdownMenuPrimitive.RadioGroup;
+
+type DropdownMenuSubTrigger = ShadCNComponent<
+  React.ElementRef<typeof DropdownMenuPrimitive.SubTrigger>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubTrigger> & {
+    inset?: boolean;
+  }
+>;
+
+type DropdownMenuSubContent = ShadCNComponent<
+  React.ElementRef<typeof DropdownMenuPrimitive.SubContent>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubContent>
+>;
+
+type DropdownMenuContent = ShadCNComponent<
+  React.ElementRef<typeof DropdownMenuPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
+>;
+
+type DropdownMenuItem = ShadCNComponent<
+  React.ElementRef<typeof DropdownMenuPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & {
+    inset?: boolean;
+  }
+>;
+
+type DropdownMenuCheckboxItem = ShadCNComponent<
+  React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>
+>;
+
+type DropdownMenuRadioItem = ShadCNComponent<
+  React.ElementRef<typeof DropdownMenuPrimitive.RadioItem>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem>
+>;
+
+type DropdownMenuLabel = ShadCNComponent<
+  React.ElementRef<typeof DropdownMenuPrimitive.Label>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Label> & {
+    inset?: boolean;
+  }
+>;
+
+type DropdownMenuSeparator = ShadCNComponent<
+  React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>
+>;
+
+type DropdownMenuShortcut = (
+  props: React.HTMLAttributes<HTMLSpanElement>
+) => JSX.Element;
+
+type Command = ShadCNComponent<
+  React.ElementRef<typeof CommandPrimitive>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive>
+>;
+
+type CommandDialog = (props: DialogProps) => JSX.Element;
+
+type CommandInput = ShadCNComponent<
+  React.ElementRef<typeof CommandPrimitive.Input>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
+>;
+
+type CommandList = ShadCNComponent<
+  React.ElementRef<typeof CommandPrimitive.List>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.List>
+>;
+
+type CommandEmpty = ShadCNComponent<
+  React.ElementRef<typeof CommandPrimitive.Empty>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>
+>;
+
+type CommandGroup = ShadCNComponent<
+  React.ElementRef<typeof CommandPrimitive.Group>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group>
+>;
+
+type CommandSeparator = ShadCNComponent<
+  React.ElementRef<typeof CommandPrimitive.Separator>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>
+>;
+
+type CommandItem = ShadCNComponent<
+  React.ElementRef<typeof CommandPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
+>;
+
+type CommandShortcut = (
+  props: React.HTMLAttributes<HTMLSpanElement>
+) => JSX.Element;
+
+type Popover = typeof PopoverPrimitive.Root;
+
+type PopoverTrigger = typeof PopoverPrimitive.Trigger;
+
+type PopoverContent = ShadCNComponent<
+  React.ElementRef<typeof PopoverPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
+>;
+
+type Separator = ShadCNComponent<
+  React.ElementRef<typeof SeparatorPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>
+>;
+
 export type RequiredComponents = {
+  Separator: Separator;
+  Popover: Popover;
+  PopoverTrigger: PopoverTrigger;
+  PopoverContent: PopoverContent;
+  Command: Command;
+  CommandDialog: CommandDialog;
+  CommandInput: CommandInput;
+  CommandList: CommandList;
+  CommandEmpty: CommandEmpty;
+  CommandGroup: CommandGroup;
+  CommandItem: CommandItem;
+  CommandShortcut: CommandShortcut;
+  CommandSeparator: CommandSeparator;
+  DropdownMenu: DropdownMenu;
+  DropdownMenuTrigger: DropdownMenuTrigger;
+  DropdownMenuContent: DropdownMenuContent;
+  DropdownMenuItem: DropdownMenuItem;
+  DropdownMenuCheckboxItem: DropdownMenuCheckboxItem;
+  DropdownMenuRadioItem: DropdownMenuRadioItem;
+  DropdownMenuLabel: DropdownMenuLabel;
+  DropdownMenuSeparator: DropdownMenuSeparator;
+  DropdownMenuShortcut: DropdownMenuShortcut;
+  DropdownMenuGroup: DropdownMenuGroup;
+  DropdownMenuPortal: DropdownMenuPortal;
+  DropdownMenuSub: DropdownMenuSub;
+  DropdownMenuSubContent: DropdownMenuSubContent;
+  DropdownMenuSubTrigger: DropdownMenuSubTrigger;
+  DropdownMenuRadioGroup: DropdownMenuRadioGroup;
+  Checkbox: Checkbox;
+  Badge: Badge;
   Avatar: Avatar;
   AvatarImage: AvatarImage;
   AvatarFallback: AvatarFallback;

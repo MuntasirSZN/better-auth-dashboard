@@ -1,7 +1,7 @@
 import type { User } from "better-auth";
 import type { RequiredComponents } from "../../types";
 import { UserPFP } from "./UserPFP";
-import type { MutableRefObject } from "react";
+import { useState, type MutableRefObject } from "react";
 
 export function UserView({
   components,
@@ -10,7 +10,21 @@ export function UserView({
   components: RequiredComponents;
   selectedUser: MutableRefObject<User | null>;
 }) {
-  const { SheetHeader, SheetTitle, SheetDescription } = components;
+  const {
+    SheetHeader,
+    SheetTitle,
+    SheetDescription,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+    TableCaption,
+  } = components;
+
+  const [tableContent, setTableContent] = useState(selectedUser.current ?? {});
+
   return (
     <>
       <SheetHeader className="relative">
@@ -29,7 +43,37 @@ export function UserView({
         </SheetDescription>
       </SheetHeader>
       <div className="w-[500px] my-5">
-        <pre>{JSON.stringify(selectedUser.current, null, 2)}</pre>
+        <Table>
+          <TableCaption>Hello world</TableCaption>
+          <TableHeader>
+            <TableRow>
+              {Object.keys(tableContent).map((key, i) => {
+                return <TableHead key={i}>{key}</TableHead>;
+              })}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {Object.values(tableContent).map((vals, i) => {
+              <TableRow key={i}>
+                <TableCell className="flex items-center gap-2">
+                  <UserPFP
+                    image={user.image}
+                    name={user.name}
+                    components={components}
+                  />
+                  {user.email}
+                </TableCell>
+                <TableCell className="text-right">{user.name}</TableCell>
+                <TableCell className="hidden text-right md:table-cell">
+                  {user.updatedAt.toDateString()}
+                </TableCell>
+                <TableCell className="hidden text-right md:table-cell">
+                  {user.createdAt.toDateString()}
+                </TableCell>
+              </TableRow>;
+            })}
+          </TableBody>
+        </Table>
       </div>
     </>
   );
