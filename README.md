@@ -17,7 +17,18 @@ This package is not ready.
 
 ## Screenshots
 
+### Home
+
+*image soon to come*
+
+### Users
+
 <img src="./assets/users-example.png">
+
+### Organizations
+
+*image soon to come*
+
 
 ## Get started
 
