@@ -46,7 +46,7 @@ export function CreateUserDialog({
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("user");
   const [password, setPassword] = useState("");
-  const [extraData, setExtraData] = useState("{}");
+  const [extraData, setExtraData] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
