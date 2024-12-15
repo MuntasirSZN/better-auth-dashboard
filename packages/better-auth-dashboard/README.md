@@ -19,7 +19,7 @@ This package is not ready.
 
 ### Home
 
-*image soon to come*
+_image soon to come_
 
 ### Users
 
@@ -27,7 +27,7 @@ This package is not ready.
 
 ### Organizations
 
-*image soon to come*
+_image soon to come_
 
 ## Themeing and Components
 
@@ -35,6 +35,9 @@ Everything in the dashboard is built on top of [ShadCN UI](https://ui.shadcn.com
 
 Meaning you can control how the components look and act, as well as style or theme them as you desire.
 
+## Plugins
+
+Better-Auth-Dashboard works dynamically by utilizing plugins, this allows you to control what components you wnat to see in your dashboard, as well as extending it if you wish.
 
 ## Get started
 
