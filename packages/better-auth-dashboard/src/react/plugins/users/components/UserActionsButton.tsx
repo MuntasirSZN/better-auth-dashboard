@@ -8,7 +8,13 @@ export function UserActionsButton({
   const { Button } = components;
   return (
     <>
-      <Button className="h-[35.99] ml-2" color="primary">
+      <Button
+        className="h-[35.99] ml-2"
+        color="primary"
+        onClick={() => {
+          console.log(`Hello!`);
+        }}
+      >
         Perform Actions
       </Button>
     </>

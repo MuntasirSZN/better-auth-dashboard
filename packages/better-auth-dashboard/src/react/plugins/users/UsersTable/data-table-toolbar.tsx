@@ -62,9 +62,9 @@ export function DataTableToolbar<TData>({
   }, [searchTimeout]);
 
   return (
-    <form autoComplete="off">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center flex-1 space-x-2">
+    <div className="flex items-center justify-between">
+      <div className="flex items-center flex-1 space-x-2">
+        <form autoComplete="off">
           <Input
             placeholder="Filter users..."
             value={localSearchValue}
@@ -73,39 +73,39 @@ export function DataTableToolbar<TData>({
             type="text"
             className="h-8 w-[150px] lg:w-[250px]"
           />
-          {table.getColumn("role") && (
-            <DataTableFacetedFilter
-              components={components}
-              column={table.getColumn("role")}
-              title="Role"
-              options={roles}
-            />
-          )}
-          {isFiltered && (
-            <Button
-              // @ts-expect-error - intentional
-              variant="ghost"
-              onClick={() => {
-                table.resetColumnFilters();
-                setLocalSearchValue("");
-                if (onSearch) {
-                  onSearch("");
-                }
-              }}
-              className="h-8 px-2 lg:px-3"
-            >
-              Reset
-              <X />
-            </Button>
-          )}
-        </div>
-        <DataTableViewOptions components={components} table={table} />
-        {Object.keys(rowSelection).length > 0 ? (
-          <UserActionsButton components={components} />
-        ) : (
-          <CreateUserDialog components={components} />
+        </form>
+        {table.getColumn("role") && (
+          <DataTableFacetedFilter
+            components={components}
+            column={table.getColumn("role")}
+            title="Role"
+            options={roles}
+          />
+        )}
+        {isFiltered && (
+          <Button
+            // @ts-expect-error - intentional
+            variant="ghost"
+            onClick={() => {
+              table.resetColumnFilters();
+              setLocalSearchValue("");
+              if (onSearch) {
+                onSearch("");
+              }
+            }}
+            className="h-8 px-2 lg:px-3"
+          >
+            Reset
+            <X />
+          </Button>
         )}
       </div>
-    </form>
+      <DataTableViewOptions components={components} table={table} />
+      {Object.keys(rowSelection).length > 0 ? (
+        <UserActionsButton components={components} />
+      ) : (
+        <CreateUserDialog components={components} />
+      )}
+    </div>
   );
 }
