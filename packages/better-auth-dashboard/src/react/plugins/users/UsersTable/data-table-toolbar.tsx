@@ -8,17 +8,20 @@ import { roles } from "../data/data";
 import { DataTableFacetedFilter } from "./data-table-faceted-filter";
 import type { RequiredComponents } from "../../../types";
 import { CreateUserDialog } from "../components/CreateUserDialog";
+import { UserActionsButton } from "../components/UserActionsButton";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
   components: RequiredComponents;
   onSearch?: (value: string) => void;
+  rowSelection: object;
 }
 
 export function DataTableToolbar<TData>({
   table,
   components,
   onSearch,
+  rowSelection,
 }: DataTableToolbarProps<TData>) {
   const { Button, Input } = components;
   const isFiltered = table.getState().columnFilters.length > 0;
@@ -97,7 +100,11 @@ export function DataTableToolbar<TData>({
           )}
         </div>
         <DataTableViewOptions components={components} table={table} />
-        <CreateUserDialog components={components} />
+        {Object.keys(rowSelection).length > 0 ? (
+          <UserActionsButton components={components} />
+        ) : (
+          <CreateUserDialog components={components} />
+        )}
       </div>
     </form>
   );

@@ -1,3 +1,4 @@
+import { Toaster as Sonner } from "sonner";
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
 import { type DialogProps } from "@radix-ui/react-dialog";
@@ -437,7 +438,12 @@ type Textarea = ShadCNComponent<
   React.ComponentProps<"textarea">
 >;
 
+type ToasterProps = React.ComponentProps<typeof Sonner>;
+
+type Toaster = (props: ToasterProps) => JSX.Element;
+
 export type RequiredComponents = {
+  Toaster: Toaster;
   Textarea: Textarea;
   AlertDialog: AlertDialog;
   AlertDialogPortal: AlertDialogPortal;

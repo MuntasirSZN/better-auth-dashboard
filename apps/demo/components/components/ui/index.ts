@@ -19,3 +19,4 @@ export * from "./popover";
 export * from "./separator";
 export * from "./alert-dialog";
 export * from "./textarea";
+export * from "./sonner";

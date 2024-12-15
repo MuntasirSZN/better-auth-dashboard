@@ -120,11 +120,11 @@ export function DataTable<TData, TValue>({
         setTableMeasures(widths);
       }
     }
-  }, [data]);
+  }, [data, columnVisibility]);
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar components={components} table={table} onSearch={handleSearch} />
+      <DataTableToolbar rowSelection={rowSelection} components={components} table={table} onSearch={handleSearch} />
 
       {/* Fixed height container */}
       <div className="border rounded-md h-[600px] flex flex-col">
