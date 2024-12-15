@@ -6,7 +6,7 @@ import { roles } from "../data/data";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
 import type { RequiredComponents } from "../../../types";
-import { UserPFP } from "../UserPFP";
+import { UserPFP } from "../components/UserPFP";
 import type { User } from "../UsersComponent";
 
 export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (

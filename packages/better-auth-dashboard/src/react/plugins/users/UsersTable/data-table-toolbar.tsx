@@ -7,6 +7,7 @@ import { DataTableViewOptions } from "./data-table-view-options";
 import { roles } from "../data/data";
 import { DataTableFacetedFilter } from "./data-table-faceted-filter";
 import type { RequiredComponents } from "../../../types";
+import { CreateUserDialog } from "../components/CreateUserDialog";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -58,42 +59,46 @@ export function DataTableToolbar<TData>({
   }, [searchTimeout]);
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex items-center flex-1 space-x-2">
-        <Input
-          placeholder="Filter users..."
-          value={localSearchValue}
-          onChange={handleSearchChange}
-          className="h-8 w-[150px] lg:w-[250px]"
-        />
-        {table.getColumn("role") && (
-          <DataTableFacetedFilter
-            components={components}
-            column={table.getColumn("role")}
-            title="Role"
-            options={roles}
+    <form autoComplete="off">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center flex-1 space-x-2">
+          <Input
+            placeholder="Filter users..."
+            value={localSearchValue}
+            onChange={handleSearchChange}
+            autoComplete="off"
+            type="text"
+            className="h-8 w-[150px] lg:w-[250px]"
           />
-        )}
-        {isFiltered && (
-          <Button
-            // @ts-expect-error - intentional
-            variant="ghost"
-            onClick={() => {
-              table.resetColumnFilters();
-              setLocalSearchValue("");
-              if (onSearch) {
-                onSearch("");
-              }
-            }}
-            className="h-8 px-2 lg:px-3"
-          >
-            Reset
-            <X />
-          </Button>
-        )}
+          {table.getColumn("role") && (
+            <DataTableFacetedFilter
+              components={components}
+              column={table.getColumn("role")}
+              title="Role"
+              options={roles}
+            />
+          )}
+          {isFiltered && (
+            <Button
+              // @ts-expect-error - intentional
+              variant="ghost"
+              onClick={() => {
+                table.resetColumnFilters();
+                setLocalSearchValue("");
+                if (onSearch) {
+                  onSearch("");
+                }
+              }}
+              className="h-8 px-2 lg:px-3"
+            >
+              Reset
+              <X />
+            </Button>
+          )}
+        </div>
+        <DataTableViewOptions components={components} table={table} />
+        <CreateUserDialog components={components} />
       </div>
-      <DataTableViewOptions components={components} table={table} />
-      <Button className="h-[35.99] ml-2" color="primary">Create User</Button>
-    </div>
+    </form>
   );
 }

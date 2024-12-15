@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import type { RequiredComponents } from "../../types";
+import type { RequiredComponents } from "../../../types";
 
 export function PaginationUI({
   components,

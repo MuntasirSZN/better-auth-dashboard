@@ -1,5 +1,5 @@
 import type { User } from "better-auth";
-import type { RequiredComponents } from "../../types";
+import type { RequiredComponents } from "../../../types";
 import { UserPFP } from "./UserPFP";
 import { useState, type MutableRefObject } from "react";
 

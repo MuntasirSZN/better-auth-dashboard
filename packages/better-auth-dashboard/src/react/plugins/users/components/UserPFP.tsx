@@ -1,4 +1,4 @@
-import type { RequiredComponents } from "../../types";
+import type { RequiredComponents } from "../../../types";
 
 export function UserPFP({
   components,

@@ -3,7 +3,7 @@ import { createAuthClient } from "better-auth/react";
 import { adminClient } from "better-auth/client/plugins";
 import { memo, useRef, useState, useCallback } from "react";
 import type { RequiredComponents } from "../../types";
-import { UserView } from "./UserView";
+import { UserView } from "./components/UserView";
 import { DataTable } from "./UsersTable/data-table";
 import { columns } from "./UsersTable/columns";
 
