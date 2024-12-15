@@ -8,6 +8,7 @@ import { DataTableRowActions } from "./data-table-row-actions";
 import type { RequiredComponents } from "../../../types";
 import { UserPFP } from "../components/UserPFP";
 import type { User } from "../UsersComponent";
+import { Tag } from "lucide-react";
 
 export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
   components
@@ -128,17 +129,16 @@ export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
         const status = roles.find(
           (role) => role.value === row.getValue("role")
         );
-
-        if (!status) {
-          return null;
-        }
+        const role_name:string = row.getValue("role");
 
         return (
           <div className="flex w-[100px] items-center">
-            {status.icon && (
+            {status && status.icon ? (
               <status.icon className="w-4 h-4 mr-2 text-muted-foreground" />
+            ) : (
+              <Tag className="w-4 h-4 mr-2 text-muted-foreground" />
             )}
-            <span>{status.label}</span>
+            <span>{role_name.charAt(0).toUpperCase()}{role_name.slice(1, role_name.length)}</span>
           </div>
         );
       },

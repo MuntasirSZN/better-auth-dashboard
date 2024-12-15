@@ -1,7 +1,7 @@
 "use client";
 
 import type { Table } from "@tanstack/react-table";
-import { X } from "lucide-react";
+import { Tag, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { DataTableViewOptions } from "./data-table-view-options";
 import { roles } from "../data/data";
@@ -61,6 +61,16 @@ export function DataTableToolbar<TData>({
     };
   }, [searchTimeout]);
 
+  const roleColumn = table.getColumn("role");
+  const uniqueRoles = roleColumn?.getFacetedUniqueValues();
+  const roleNames = Array.from(uniqueRoles?.keys() ?? [])
+    .filter((x) => x !== "admin" && x !== "user")
+    .map((role: string) => ({
+      value: role,
+      label: role.charAt(0).toUpperCase() + role.slice(1, role.length),
+      icon: Tag,
+    }));
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center flex-1 space-x-2">
@@ -79,7 +89,7 @@ export function DataTableToolbar<TData>({
             components={components}
             column={table.getColumn("role")}
             title="Role"
-            options={roles}
+            options={[...roles, ...roleNames]}
           />
         )}
         {isFiltered && (
