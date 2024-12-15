@@ -15,7 +15,7 @@ function getExtraData(jsonStr: string) {
     return { success: true, data: parsedJson, error: null };
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (_) {
-    return { success: false, data: null, error: "Invalid extra data field." };
+    return { success: false, data: null, error: "Invalid JSON format in extra data field." };
   }
 }
 
@@ -48,7 +48,7 @@ export function CreateUserDialog({
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("user");
   const [password, setPassword] = useState("");
-  const [extraData, setExtraData] = useState("");
+  const [extraData, setExtraData] = useState("{}");
   const [alertOpen, setAlertOpen] = useState(false);
   const [error, setError] = useState("");
 
