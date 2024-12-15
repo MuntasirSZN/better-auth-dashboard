@@ -75,6 +75,12 @@ export function CreateUserDialog({
     }
 
     console.log(`User created: `, data);
+    setError("");
+    setName("");
+    setEmail("");
+    setExtraData("");
+    setPassword("");
+    setAlertOpen(true);
   }, [extraData, name, email, password, role]);
 
   return (
