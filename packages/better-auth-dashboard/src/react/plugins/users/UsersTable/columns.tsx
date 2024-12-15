@@ -71,7 +71,7 @@ export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
               image={image}
               name={
                 name.includes(" ") && name.length >= 3
-                  ? `${name.split(" ")[0].charAt(0).toUpperCase()} ${name.split(" ")[1].charAt(0).toUpperCase()}`
+                  ? `${name.split(" ")[0].charAt(0).toUpperCase()}${name.split(" ")[1].charAt(0).toUpperCase()}`
                   : name.length >= 2
                     ? `${name.charAt(0).toUpperCase()}${name.charAt(1).toUpperCase()}`
                     : `${name.charAt(0).toUpperCase()}`

@@ -129,9 +129,9 @@ export function DataTable<TData, TValue>({
       {/* Fixed height container */}
       <div className="border rounded-md h-[600px] flex flex-col">
         {/* Header with sticky positioning */}
-        <div className="sticky top-0 z-10 bg-background">
+        <div className="sticky top-0 z-10 rounded-md bg-background">
           <Table>
-            <TableHeader>
+            <TableHeader >
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header, index) => (
@@ -139,7 +139,6 @@ export function DataTable<TData, TValue>({
                       key={header.id}
                       colSpan={header.colSpan}
                       style={{ width: tableMeasures[index] }}
-                      className="bg-background"
                     >
                       {header.isPlaceholder
                         ? null
