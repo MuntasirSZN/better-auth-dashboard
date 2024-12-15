@@ -432,7 +432,13 @@ type AlertDialogCancel = ShadCNComponent<
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>
 >;
 
+type Textarea = ShadCNComponent<
+  HTMLTextAreaElement,
+  React.ComponentProps<"textarea">
+>;
+
 export type RequiredComponents = {
+  Textarea: Textarea;
   AlertDialog: AlertDialog;
   AlertDialogPortal: AlertDialogPortal;
   AlertDialogOverlay: AlertDialogOverlay;

@@ -1,9 +1,8 @@
 "use client";
 import { useCallback, useState } from "react";
 import type { RequiredComponents } from "../../../types";
-import CodeMirror from "@uiw/react-codemirror";
-import { json } from "@codemirror/lang-json";
 import { authClient } from "../UsersComponent";
+import { CircleX } from "lucide-react";
 
 function getExtraData(jsonStr: string) {
   try {
@@ -15,7 +14,11 @@ function getExtraData(jsonStr: string) {
     return { success: true, data: parsedJson, error: null };
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (_) {
-    return { success: false, data: null, error: "Invalid JSON format in extra data field." };
+    return {
+      success: false,
+      data: null,
+      error: "Invalid JSON format in extra data field.",
+    };
   }
 }
 
@@ -35,13 +38,7 @@ export function CreateUserDialog({
     DialogTitle,
     DialogTrigger,
     Label,
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
+    Textarea,
   } = components;
 
   const [name, setName] = useState("");
@@ -49,14 +46,15 @@ export function CreateUserDialog({
   const [role, setRole] = useState("user");
   const [password, setPassword] = useState("");
   const [extraData, setExtraData] = useState("{}");
-  const [alertOpen, setAlertOpen] = useState(false);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const createUser = useCallback(async () => {
+    setIsLoading(true);
     const extraDataResult = getExtraData(extraData);
     if (!extraDataResult.success) {
       setError(extraDataResult.error as string);
-      setAlertOpen(true);
+      setIsLoading(false);
       return;
     }
 
@@ -69,8 +67,8 @@ export function CreateUserDialog({
     });
 
     if (error) {
-      setError(error.statusText);
-      setAlertOpen(true);
+      setError(error.message || error.statusText);
+      setIsLoading(false);
       return;
     }
 
@@ -80,31 +78,11 @@ export function CreateUserDialog({
     setEmail("");
     setExtraData("");
     setPassword("");
-    setAlertOpen(true);
+    setIsLoading(false);
   }, [extraData, name, email, password, role]);
 
   return (
     <>
-      <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              {error.trim().length === 0 ? "Success!" : "An error occured"}
-            </AlertDialogTitle>
-            <AlertDialogDescription>
-              {error.trim().length === 0
-                ? "You've successfully created a new user!"
-                : error}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction>Continue</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-
-      {/* ------------------------- */}
-
       <Dialog>
         <DialogTrigger asChild>
           <Button className="h-[35.99] ml-2" color="primary">
@@ -119,6 +97,12 @@ export function CreateUserDialog({
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
+            {error.trim().length === 0 ? null : (
+              <div className="flex items-center gap-2 px-3 py-4 mb-3 text-sm border rounded-md text-destructive bg-destructive/10 border-destructive">
+                <CircleX size={20} />
+                {error}
+              </div>
+            )}
             <div className="grid items-center grid-cols-4 gap-4">
               <Label htmlFor="name" className="text-right">
                 Name
@@ -179,22 +163,17 @@ export function CreateUserDialog({
                   (optional)
                 </span>
               </Label>
-              <CodeMirror
+              <Textarea
                 id="extraData"
                 value={extraData}
-                height="200px"
-                theme="dark"
-                className="col-span-3 overflow-hidden rounded-md"
-                style={{
-                  zoom: "80%",
-                }}
-                extensions={[json()]}
-                onChange={setExtraData}
+                onChange={(e) => setExtraData(e.currentTarget.value)}
+                className="col-span-3"
+                placeholder={'{\n  "someField": true\n}'}
               />
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" onClick={createUser}>
+            <Button type="submit" onClick={createUser} disabled={isLoading}>
               Create
             </Button>
           </DialogFooter>
