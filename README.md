@@ -35,6 +35,8 @@ Everything in the dashboard is built on top of [ShadCN UI](https://ui.shadcn.com
 
 Meaning you can control how the components look and act, as well as style or theme them as you desire.
 
+<img src="/assets/shadcn-homepage.png">
+
 ## Plugins
 
 Better-Auth-Dashboard works dynamically by utilizing plugins, this allows you to control what components you want to see in your dashboard, as well as extending it if you wish.
