@@ -17,3 +17,4 @@ export * from "./dropdown-menu";
 export * from "./command";
 export * from "./popover";
 export * from "./separator";
+export * from "./alert-dialog";

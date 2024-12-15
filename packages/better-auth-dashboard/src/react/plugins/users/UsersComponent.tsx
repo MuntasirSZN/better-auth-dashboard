@@ -7,7 +7,7 @@ import { UserView } from "./components/UserView";
 import { DataTable } from "./UsersTable/data-table";
 import { columns } from "./UsersTable/columns";
 
-const authClient = createAuthClient({
+export const authClient = createAuthClient({
   plugins: [adminClient()],
 });
 

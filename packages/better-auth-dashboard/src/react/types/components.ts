@@ -1,3 +1,4 @@
+import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
 import { type DialogProps } from "@radix-ui/react-dialog";
 import { Command as CommandPrimitive } from "cmdk";
@@ -387,7 +388,62 @@ type Separator = ShadCNComponent<
   React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>
 >;
 
+type AlertDialog = typeof AlertDialogPrimitive.Root;
+
+type AlertDialogTrigger = typeof AlertDialogPrimitive.Trigger;
+
+type AlertDialogPortal = typeof AlertDialogPrimitive.Portal;
+
+type AlertDialogOverlay = ShadCNComponent<
+  React.ElementRef<typeof AlertDialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>
+>;
+
+type AlertDialogContent = ShadCNComponent<
+  React.ElementRef<typeof AlertDialogPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
+>;
+
+type AlertDialogHeader = (
+  props: React.HTMLAttributes<HTMLDivElement>
+) => JSX.Element;
+
+type AlertDialogFooter = (
+  props: React.HTMLAttributes<HTMLDivElement>
+) => JSX.Element;
+
+type AlertDialogTitle = ShadCNComponent<
+  React.ElementRef<typeof AlertDialogPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>
+>;
+
+type AlertDialogDescription = ShadCNComponent<
+  React.ElementRef<typeof AlertDialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>
+>;
+
+type AlertDialogAction = ShadCNComponent<
+  React.ElementRef<typeof AlertDialogPrimitive.Action>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>
+>;
+
+type AlertDialogCancel = ShadCNComponent<
+  React.ElementRef<typeof AlertDialogPrimitive.Cancel>,
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>
+>;
+
 export type RequiredComponents = {
+  AlertDialog: AlertDialog;
+  AlertDialogPortal: AlertDialogPortal;
+  AlertDialogOverlay: AlertDialogOverlay;
+  AlertDialogTrigger: AlertDialogTrigger;
+  AlertDialogContent: AlertDialogContent;
+  AlertDialogHeader: AlertDialogHeader;
+  AlertDialogFooter: AlertDialogFooter;
+  AlertDialogTitle: AlertDialogTitle;
+  AlertDialogDescription: AlertDialogDescription;
+  AlertDialogAction: AlertDialogAction;
+  AlertDialogCancel: AlertDialogCancel;
   Separator: Separator;
   Popover: Popover;
   PopoverTrigger: PopoverTrigger;
