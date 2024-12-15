@@ -29,6 +29,11 @@ This package is not ready.
 
 *image soon to come*
 
+## Themeing and Components
+
+Everything in the dashboard is built on top of [ShadCN UI](https://ui.shadcn.com/) components from YOUR app.
+
+Meaning you can control how the components look and act, as well as style or theme them as you desire.
 
 ## Get started
 
