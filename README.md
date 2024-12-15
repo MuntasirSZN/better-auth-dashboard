@@ -23,7 +23,7 @@ This package is not ready.
 
 ### Users
 
-<img src="./assets/users-example.png">
+<img src="https://raw.githubusercontent.com/Multinite/better-auth-dashboard/refs/heads/main/assets/users-example.png">
 
 ### Organizations
 
