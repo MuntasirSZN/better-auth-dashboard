@@ -5,12 +5,10 @@ export type DashboardMiddlewareOptions = {
 };
 
 export const dashboardMiddleware = (
-  callback: (
-    request?: NextRequest
-  ) => Promise<void | NextResponse> | void | NextResponse,
+  callback: (request: NextRequest) => NextResponse,
   options: DashboardMiddlewareOptions = {}
 ) => {
-  return async (request: NextRequest) => {
+  return (request: NextRequest) => {
     const { baseURL = new URL(request.url).origin } = options;
 
     const getSessionURL = new URL("/auth/get-session", baseURL);
@@ -27,7 +25,7 @@ export const dashboardMiddleware = (
         }
       });
 
-    return await callback(request);
+    return callback(request);
   };
 };
 

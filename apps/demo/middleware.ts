@@ -4,10 +4,14 @@ import {
   dashboardMiddleware,
 } from "better-auth-dashboard/next";
 
-export const middleware = dashboardMiddleware((request) => {
-  // middleware code...
+// export const middleware = dashboardMiddleware((request) => {
+//   // middleware code...
+//   return NextResponse.next();
+// });
+
+export const middleware = () => {
   return NextResponse.next();
-});
+}
 
 export const config = {
   matcher: [
