@@ -1,4 +1,5 @@
 "use client";
+import { toast } from "sonner";
 import { useCallback, useState } from "react";
 import type { RequiredComponents } from "../../../types";
 import { authClient } from "../UsersComponent";
@@ -55,6 +56,7 @@ export function CreateUserDialog({
     if (!extraDataResult.success) {
       setError(extraDataResult.error as string);
       setIsLoading(false);
+      toast.error("Error creating user: " + extraDataResult.error as string);
       return;
     }
 
@@ -67,8 +69,10 @@ export function CreateUserDialog({
     });
 
     if (error) {
-      setError(error.message || error.statusText);
+      const err = error.message || error.statusText;
+      setError(err);
       setIsLoading(false);
+      toast.error("Error creating user: " + err);
       return;
     }
 
@@ -79,6 +83,7 @@ export function CreateUserDialog({
     setExtraData("");
     setPassword("");
     setIsLoading(false);
+    toast.success("User successfully created");
   }, [extraData, name, email, password, role]);
 
   return (

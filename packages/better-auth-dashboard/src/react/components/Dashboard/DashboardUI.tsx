@@ -15,6 +15,7 @@ export const DashboardUI = memo(
     path: string;
     plugins: DashboardProps["plugins"];
   }) => {
+    const { Toaster } = components;
     const [items, setItems] = useState<Item[]>([
       {
         title: "Home",
@@ -62,6 +63,7 @@ export const DashboardUI = memo(
           <components.SidebarTrigger className="absolute z-10 ml-2 bottom-1" />
           {items.find((x) => x.isActive)?.component()}
         </main>
+        <Toaster />
       </>
     );
   }
