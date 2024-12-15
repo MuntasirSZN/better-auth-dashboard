@@ -35,7 +35,7 @@ Everything in the dashboard is built on top of [ShadCN UI](https://ui.shadcn.com
 
 Meaning you can control how the components look and act, as well as style or theme them as you desire.
 
-<img src="/assets/shadcn-homepage.png">
+<img src="https://raw.githubusercontent.com/Multinite/better-auth-dashboard/refs/heads/main/assets/shadcn-homepage.png">
 
 ## Plugins
 
