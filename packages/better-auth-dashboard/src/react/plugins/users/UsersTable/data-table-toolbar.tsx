@@ -112,7 +112,7 @@ export function DataTableToolbar<TData>({
       </div>
       <DataTableViewOptions components={components} table={table} />
       {Object.keys(rowSelection).length > 0 ? (
-        <UserActionsButton components={components} />
+        <UserActionsButton components={components} rowSelection={rowSelection} />
       ) : (
         <CreateUserDialog components={components} />
       )}

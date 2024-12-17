@@ -5,6 +5,7 @@ import {
   type ColumnDef,
   type ColumnFiltersState,
   type SortingState,
+  type Table,
   type VisibilityState,
   flexRender,
   getCoreRowModel,
@@ -36,15 +37,6 @@ export function DataTable<TData, TValue>({
   hasMore = true,
   onSearch,
 }: DataTableProps<TData, TValue>) {
-  const {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } = components;
-
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -62,30 +54,21 @@ export function DataTable<TData, TValue>({
 
   // Initial load
   React.useEffect(() => {
-    if(initialLoadFetched.current === true) return;
+    if (initialLoadFetched.current === true) return;
     initialLoadFetched.current = true;
     onPaginationChange(0, pageSize);
   }, []);
 
-  // Handle scroll-based loading
-  const handleScroll = React.useCallback(() => {
-    if (!tableContainerRef.current || isLoading || !hasMore) return;
-
-    const { scrollTop, scrollHeight, clientHeight } = tableContainerRef.current;
-    if (scrollHeight - scrollTop <= clientHeight + 20) {
-      const nextPage = pageIndex + 1;
-      setPageIndex(nextPage);
-      onPaginationChange(nextPage, pageSize);
-    }
-  }, [isLoading, hasMore, pageIndex, pageSize, onPaginationChange]);
-
   // Handle search
-  const handleSearch = React.useCallback((value: string) => {
-    setPageIndex(0); // Reset to first page
-    if (onSearch) {
-      onSearch(value);
-    }
-  }, [onSearch]);
+  const handleSearch = React.useCallback(
+    (value: string) => {
+      setPageIndex(0); // Reset to first page
+      if (onSearch) {
+        onSearch(value);
+      }
+    },
+    [onSearch]
+  );
 
   const columns_ = columns(components);
 
@@ -113,10 +96,10 @@ export function DataTable<TData, TValue>({
   // Measure table column widths after initial render
   React.useEffect(() => {
     if (tableContainerRef.current) {
-      const firstRow = tableContainerRef.current.querySelector('tr');
+      const firstRow = tableContainerRef.current.querySelector("tr");
       if (firstRow) {
         const cells = Array.from(firstRow.children);
-        const widths = cells.map(cell => cell.getBoundingClientRect().width);
+        const widths = cells.map((cell) => cell.getBoundingClientRect().width);
         setTableMeasures(widths);
       }
     }
@@ -124,96 +107,167 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar rowSelection={rowSelection} components={components} table={table} onSearch={handleSearch} />
-
-      {/* Fixed height container */}
-      <div className="border rounded-md h-[600px] flex flex-col">
-        {/* Header with sticky positioning */}
-        <div className="sticky top-0 z-10 rounded-md bg-background">
-          <Table>
-            <TableHeader >
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header, index) => (
-                    <TableHead
-                      key={header.id}
-                      colSpan={header.colSpan}
-                      style={{ width: tableMeasures[index] }}
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  ))}
-                </TableRow>
-              ))}
-            </TableHeader>
-          </Table>
-        </div>
-
-        {/* Scrollable body */}
-        <div
-          ref={tableContainerRef}
-          className="flex-1 overflow-auto"
-          onScroll={handleScroll}
-        >
-          <Table>
-            <TableBody>
-              {table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns_.length}
-                    className="h-24 text-center"
-                  >
-                    No results.
-                  </TableCell>
-                </TableRow>
-              )}
-
-              {isLoading && (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns_.length}
-                    className="h-12 text-center"
-                  >
-                    Loading more...
-                  </TableCell>
-                </TableRow>
-              )}
-
-              {!hasMore && !isLoading && data.length > 0 && (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns_.length}
-                    className="h-12 text-center text-muted-foreground"
-                  >
-                    No more users to load
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
-      </div>
+      <DataTableToolbar
+        rowSelection={rowSelection}
+        components={components}
+        table={table}
+        onSearch={handleSearch}
+      />
+      <TableRender
+        components={components}
+        table={table}
+        columns_={columns_}
+        data={data}
+        hasMore={hasMore}
+        isLoading={isLoading}
+        onPaginationChange={onPaginationChange}
+        pageIndex={pageIndex}
+        pageSize={pageSize}
+        setPageIndex={setPageIndex}
+        tableContainerRef={tableContainerRef}
+        tableMeasures={tableMeasures}
+      />
     </div>
   );
 }
+
+const TableRender = React.memo(
+  ({
+    components,
+    table,
+    hasMore,
+    isLoading,
+    tableContainerRef,
+    pageIndex,
+    setPageIndex,
+    onPaginationChange,
+    pageSize,
+    tableMeasures,
+    columns_,
+    data,
+  }: {
+    components: RequiredComponents;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    table: Table<any>;
+    isLoading: boolean;
+    hasMore: boolean;
+    tableContainerRef: React.RefObject<HTMLDivElement>;
+    pageIndex: number;
+    setPageIndex: React.Dispatch<React.SetStateAction<number>>;
+    onPaginationChange: (pageIndex: number, pageSize: number) => Promise<void>;
+    pageSize: number;
+    tableMeasures: number[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    columns_: ColumnDef<any, any>[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: any[];
+  }) => {
+    const { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } =
+      components;
+
+    // Handle scroll-based loading
+    const handleScroll = React.useCallback(() => {
+      if (!tableContainerRef.current || isLoading || !hasMore) return;
+
+      const { scrollTop, scrollHeight, clientHeight } =
+        tableContainerRef.current;
+      if (scrollHeight - scrollTop <= clientHeight + 20) {
+        const nextPage = pageIndex + 1;
+        setPageIndex(nextPage);
+        onPaginationChange(nextPage, pageSize);
+      }
+    }, [isLoading, hasMore, pageIndex, pageSize, onPaginationChange]);
+
+    return (
+      <>
+        <div className="border rounded-md h-[600px] flex flex-col">
+          {/* Header with sticky positioning */}
+          <div className="sticky top-0 z-10 rounded-md bg-background">
+            <Table>
+              <TableHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header, index) => (
+                      <TableHead
+                        key={header.id}
+                        colSpan={header.colSpan}
+                        style={{ width: tableMeasures[index] }}
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableHeader>
+            </Table>
+          </div>
+
+          {/* Scrollable body */}
+          <div
+            ref={tableContainerRef}
+            className="flex-1 overflow-auto"
+            onScroll={handleScroll}
+          >
+            <Table>
+              <TableBody>
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns_.length}
+                      className="h-24 text-center"
+                    >
+                      No results.
+                    </TableCell>
+                  </TableRow>
+                )}
+
+                {isLoading && (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns_.length}
+                      className="h-12 text-center"
+                    >
+                      Loading more...
+                    </TableCell>
+                  </TableRow>
+                )}
+
+                {!hasMore && !isLoading && data.length > 0 && (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns_.length}
+                      className="h-12 text-center text-muted-foreground"
+                    >
+                      No more users to load
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+      </>
+    );
+  }
+);
