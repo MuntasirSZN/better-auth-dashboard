@@ -4,7 +4,6 @@
   "packageManager": "pnpm@9.0.0",
   "version": "0.0.4",
   "license": "MIT",
-  "type": "module",
   "keywords": [
     "better-auth",
     "dashboard",
@@ -94,7 +93,7 @@
   "dependencies": {
     "@better-fetch/fetch": "^1.1.12",
     "@tanstack/react-table": "^8.20.6",
-    "better-auth": "^1.0.14",
+    "better-auth": "^1.1.8",
     "lucide-react": "^0.468.0",
     "zod": "^3.24.1"
   }

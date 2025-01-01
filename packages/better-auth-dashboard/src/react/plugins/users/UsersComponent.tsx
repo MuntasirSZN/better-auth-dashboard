@@ -46,6 +46,7 @@ export const UsersComponent = memo(
           },
         });
 
+
         if (result.data) {
           if (result.data.users.length < pageSize) {
             setHasMore(false);
@@ -54,9 +55,9 @@ export const UsersComponent = memo(
           }
 
           if (pageIndex === 0) {
-            setUsers(result.data.users);
+            setUsers(result.data.users as User[]);
           } else {
-            setUsers((prevUsers) => [...prevUsers, ...result.data.users]);
+            setUsers((prevUsers: User[]) => [...prevUsers, ...result.data.users as User[]]);
           }
         } else {
           console.error(`Failed to fetch list of users:`, result.error);
