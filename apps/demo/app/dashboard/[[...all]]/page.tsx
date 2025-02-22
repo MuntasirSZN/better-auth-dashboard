@@ -1,5 +1,6 @@
 "use client";
 import {
+  apiKey,
   Dashboard,
   organizations,
   routeProtection,
@@ -12,7 +13,7 @@ export default ({ params }: { params: Promise<{ all: string }> }) => {
     <Dashboard
       params={params}
       components={components}
-      plugins={[users(), organizations(), routeProtection()]}
+      plugins={[users(), organizations(), routeProtection(), apiKey()]}
     />
   );
 };
