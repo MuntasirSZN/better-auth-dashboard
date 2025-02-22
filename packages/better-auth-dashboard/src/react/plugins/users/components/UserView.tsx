@@ -3,6 +3,18 @@ import type { RequiredComponents } from "../../../types";
 import { UserPFP } from "./UserPFP";
 import { useState, type MutableRefObject } from "react";
 
+function formatDateAndTime(date: Date) {
+  return new Intl.DateTimeFormat(undefined, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZoneName: "short",
+  }).format(date);
+}
+
 export function UserView({
   components,
   selectedUser,
@@ -10,18 +22,7 @@ export function UserView({
   components: RequiredComponents;
   selectedUser: MutableRefObject<User | null>;
 }) {
-  const {
-    SheetHeader,
-    SheetTitle,
-    SheetDescription,
-    Table,
-    TableBody,
-    // TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-    TableCaption,
-  } = components;
+  const { SheetHeader, SheetTitle, SheetDescription } = components;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [tableContent, setTableContent] = useState(selectedUser.current ?? {});
@@ -43,38 +44,48 @@ export function UserView({
           {selectedUser.current?.email}
         </SheetDescription>
       </SheetHeader>
-      <div className="w-[500px] my-5">
-        <Table>
-          <TableCaption>Hello world</TableCaption>
-          <TableHeader>
-            <TableRow>
-              {Object.keys(tableContent).map((key, i) => {
-                return <TableHead key={i}>{key}</TableHead>;
-              })}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {/* {Object.values(tableContent).map((vals, i) => {
-              <TableRow key={i}>
-                <TableCell className="flex items-center gap-2">
-                  <UserPFP
-                    image={user.image}
-                    name={user.name}
-                    components={components}
-                  />
-                  {user.email}
-                </TableCell>
-                <TableCell className="text-right">{user.name}</TableCell>
-                <TableCell className="hidden text-right md:table-cell">
-                  {user.updatedAt.toDateString()}
-                </TableCell>
-                <TableCell className="hidden text-right md:table-cell">
-                  {user.createdAt.toDateString()}
-                </TableCell>
-              </TableRow>;
-            })} */}
-          </TableBody>
-        </Table>
+      <div className="my-10">
+        <div className="flex flex-col gap-2 p-4 border rounded-md border-border">
+          {selectedUser.current === null
+            ? null
+            : Object.entries(selectedUser.current).map(
+                ([key, value], index) => {
+                  let valueJsx: JSX.Element | string | null =
+                    JSON.stringify(value);
+
+                  if (value === null) {
+                    valueJsx = "null";
+                  } else if (value instanceof Date) {
+                    valueJsx = formatDateAndTime(value);
+                  } else if (Array.isArray(value)) {
+                    valueJsx = JSON.stringify(value);
+                  } else if (typeof value === "object") {
+                    valueJsx = JSON.stringify(value);
+                  } else if (typeof value === "boolean") {
+                    valueJsx = value.toString();
+                  } else if (typeof value === "string") {
+                    valueJsx = value;
+                  }
+
+                  return (
+                    <>
+                      <div className="flex items-center justify-center w-full gap-5">
+                        <div className="text-left w-fit text-muted-foreground">
+                          {key}
+                        </div>
+                        <div className="w-full font-mono text-[.8rem] text-right truncate">
+                          {valueJsx}
+                        </div>
+                      </div>
+                      {index !==
+                      Object.entries(selectedUser.current!).length - 1 ? (
+                        <div className="w-full border-b border-border"></div>
+                      ) : null}
+                    </>
+                  );
+                }
+              )}
+        </div>
       </div>
     </>
   );
