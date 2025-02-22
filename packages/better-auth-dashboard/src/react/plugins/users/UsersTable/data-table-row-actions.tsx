@@ -29,7 +29,6 @@ export function DataTableRowActions<TData>({
     DropdownMenuTrigger,
     Button,
   } = components;
-  console.log(123, row)
   // const user = userSchema.parse(row.original);
 
   return (
