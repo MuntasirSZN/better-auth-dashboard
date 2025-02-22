@@ -91,6 +91,8 @@ export const UsersComponent = memo(
               isLoading={isLoading}
               hasMore={hasMore}
               onSearch={handleSearch}
+              selectedUserRef={selectedUser}
+              setUserViewSheetOpen={setOpen}
             />
             <SheetContent className="min-w-[300px] md:min-w-[800px]">
               <UserView components={components} selectedUser={selectedUser} />

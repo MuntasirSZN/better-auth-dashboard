@@ -10,9 +10,15 @@ import { UserPFP } from "../components/UserPFP";
 import type { User } from "../UsersComponent";
 import { Tag } from "lucide-react";
 
-export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
-  components
-) => {
+export const columns: (data: {
+  components: RequiredComponents;
+  selectedUserRef: React.MutableRefObject<User | null>;
+  setUserViewSheetOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => ColumnDef<User>[] = ({
+  components,
+  selectedUserRef,
+  setUserViewSheetOpen,
+}) => {
   const { Checkbox, Badge } = components;
 
   return [
@@ -129,7 +135,7 @@ export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
         const status = roles.find(
           (role) => role.value === row.getValue("role")
         );
-        const role_name:string = row.getValue("role");
+        const role_name: string = row.getValue("role");
 
         return (
           <div className="flex w-[100px] items-center">
@@ -138,7 +144,10 @@ export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
             ) : (
               <Tag className="w-4 h-4 mr-2 text-muted-foreground" />
             )}
-            <span>{role_name.charAt(0).toUpperCase()}{role_name.slice(1, role_name.length)}</span>
+            <span>
+              {role_name.charAt(0).toUpperCase()}
+              {role_name.slice(1, role_name.length)}
+            </span>
           </div>
         );
       },
@@ -176,7 +185,12 @@ export const columns: (components: RequiredComponents) => ColumnDef<User>[] = (
     {
       id: "actions",
       cell: ({ row }) => (
-        <DataTableRowActions components={components} row={row} />
+        <DataTableRowActions
+          components={components}
+          row={row}
+          selectedUserRef={selectedUserRef}
+          setUserViewSheetOpen={setUserViewSheetOpen}
+        />
       ),
     },
   ];

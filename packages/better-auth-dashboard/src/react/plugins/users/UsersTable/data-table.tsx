@@ -17,15 +17,22 @@ import {
 } from "@tanstack/react-table";
 import { DataTableToolbar } from "./data-table-toolbar";
 import type { RequiredComponents } from "../../../types";
+import type { User } from "../UsersComponent";
 
 interface DataTableProps<TData, TValue> {
-  columns: (components: RequiredComponents) => ColumnDef<TData, TValue>[];
+  columns: (data: {
+    components: RequiredComponents;
+    selectedUserRef: React.MutableRefObject<User | null>;
+    setUserViewSheetOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  }) => ColumnDef<TData, TValue>[];
   data: TData[];
   components: RequiredComponents;
   onPaginationChange: (pageIndex: number, pageSize: number) => Promise<void>;
   isLoading?: boolean;
   hasMore?: boolean;
   onSearch?: (value: string) => void;
+  selectedUserRef: React.MutableRefObject<User | null>;
+  setUserViewSheetOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function DataTable<TData, TValue>({
@@ -36,6 +43,8 @@ export function DataTable<TData, TValue>({
   isLoading = false,
   hasMore = true,
   onSearch,
+  selectedUserRef,
+  setUserViewSheetOpen,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -70,7 +79,11 @@ export function DataTable<TData, TValue>({
     [onSearch]
   );
 
-  const columns_ = columns(components);
+  const columns_ = columns({
+    components,
+    selectedUserRef,
+    setUserViewSheetOpen,
+  });
 
   const table = useReactTable({
     data,

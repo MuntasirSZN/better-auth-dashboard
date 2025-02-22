@@ -15,8 +15,7 @@ const OrgComponent = memo(
   ({ components }: { components: RequiredComponents }) => {
     return (
       <div>
-        hello from orgs plugin!
-        <components.Button>Hello!</components.Button>
+        hello from organizations plugin!
       </div>
     );
   }

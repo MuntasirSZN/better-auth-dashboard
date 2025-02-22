@@ -6,31 +6,31 @@ import { MoreHorizontal } from "lucide-react";
 // import { labels } from "../data/data";
 // import { userSchema } from "../data/schema";
 import type { RequiredComponents } from "../../../types";
+import type { User } from "../UsersComponent";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
   components: RequiredComponents;
+  setUserViewSheetOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedUserRef: React.MutableRefObject<User | null>;
 }
 
 export function DataTableRowActions<TData>({
-  //   row,
+  row,
   components,
+  setUserViewSheetOpen,
+  selectedUserRef,
 }: DataTableRowActionsProps<TData>) {
   const {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    // DropdownMenuRadioGroup,
-    // DropdownMenuRadioItem,
     DropdownMenuSeparator,
-    // DropdownMenuShortcut,
-    // DropdownMenuSub,
-    // DropdownMenuSubContent,
-    // DropdownMenuSubTrigger,
     DropdownMenuTrigger,
     Button,
   } = components;
-  //   const user = userSchema.parse(row.original);
+  console.log(123, row)
+  // const user = userSchema.parse(row.original);
 
   return (
     <DropdownMenu>
@@ -45,21 +45,16 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>View</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            setUserViewSheetOpen(true);
+            selectedUserRef.current = row.original as User
+          }}
+        >
+          View
+        </DropdownMenuItem>
         <DropdownMenuItem>Impersonate</DropdownMenuItem>
         <DropdownMenuSeparator />
-        {/* <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={task.}>
-              {labels.map((label) => (
-                <DropdownMenuRadioItem key={label.value} value={label.value}>
-                  {label.label}
-                </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuSubContent>
-        </DropdownMenuSub> */}
         <DropdownMenuItem>Ban</DropdownMenuItem>
         <DropdownMenuItem>Unban</DropdownMenuItem>
         <DropdownMenuItem>Remove user</DropdownMenuItem>
