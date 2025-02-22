@@ -12,6 +12,7 @@ export const authClient = createAuthClient({
 });
 
 export type User = (typeof authClient.$Infer.Session)["user"];
+export type Session = (typeof authClient.$Infer.Session)["session"];
 export type AuthClient = typeof authClient;
 
 export const UsersComponent = memo(
@@ -94,7 +95,7 @@ export const UsersComponent = memo(
               selectedUserRef={selectedUser}
               setUserViewSheetOpen={setOpen}
             />
-            <SheetContent className="min-w-[300px] md:min-w-[800px]">
+            <SheetContent className="min-w-[300px] md:min-w-[800px] overflow-y-auto">
               <UserView components={components} selectedUser={selectedUser} />
             </SheetContent>
           </Sheet>
