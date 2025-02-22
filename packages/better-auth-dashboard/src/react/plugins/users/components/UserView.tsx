@@ -45,48 +45,50 @@ export function UserView({
         </SheetDescription>
       </SheetHeader>
       <div className="my-10">
-        <div className="flex flex-col gap-2 p-4 border rounded-md border-border">
-          {selectedUser.current === null
-            ? null
-            : Object.entries(selectedUser.current).map(
-                ([key, value], index) => {
-                  let valueJsx: JSX.Element | string | null =
-                    JSON.stringify(value);
-
-                  if (value === null) {
-                    valueJsx = "null";
-                  } else if (value instanceof Date) {
-                    valueJsx = formatDateAndTime(value);
-                  } else if (Array.isArray(value)) {
-                    valueJsx = JSON.stringify(value);
-                  } else if (typeof value === "object") {
-                    valueJsx = JSON.stringify(value);
-                  } else if (typeof value === "boolean") {
-                    valueJsx = value.toString();
-                  } else if (typeof value === "string") {
-                    valueJsx = value;
-                  }
-
-                  return (
-                    <>
-                      <div className="flex items-center justify-center w-full gap-5">
-                        <div className="text-left w-fit text-muted-foreground">
-                          {key}
-                        </div>
-                        <div className="w-full font-mono text-[.8rem] text-right truncate">
-                          {valueJsx}
-                        </div>
-                      </div>
-                      {index !==
-                      Object.entries(selectedUser.current!).length - 1 ? (
-                        <div className="w-full border-b border-border"></div>
-                      ) : null}
-                    </>
-                  );
-                }
-              )}
-        </div>
+        <DataTable data={selectedUser.current} />
       </div>
     </>
+  );
+}
+
+function DataTable({ data }: { data: Record<string, unknown> | null }) {
+  return (
+    <div className="flex flex-col gap-2 p-4 border rounded-md border-border">
+      {data === null
+        ? null
+        : Object.entries(data).map(([key, value], index) => {
+            let valueJsx: JSX.Element | string | null = JSON.stringify(value);
+
+            if (value === null) {
+              valueJsx = "null";
+            } else if (value instanceof Date) {
+              valueJsx = formatDateAndTime(value);
+            } else if (Array.isArray(value)) {
+              valueJsx = JSON.stringify(value);
+            } else if (typeof value === "object") {
+              valueJsx = JSON.stringify(value);
+            } else if (typeof value === "boolean") {
+              valueJsx = value.toString();
+            } else if (typeof value === "string") {
+              valueJsx = value;
+            }
+
+            return (
+              <div key={index} className="flex flex-col gap-2 ">
+                <div className="flex items-center justify-center w-full gap-5">
+                  <div className="text-left w-fit text-muted-foreground">
+                    {key}
+                  </div>
+                  <div className="w-full font-mono text-[.8rem] text-right truncate">
+                    {valueJsx}
+                  </div>
+                </div>
+                {index !== Object.entries(data!).length - 1 ? (
+                  <div className="w-full border-b border-border"></div>
+                ) : null}
+              </div>
+            );
+          })}
+    </div>
   );
 }
