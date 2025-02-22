@@ -67,8 +67,8 @@ importers:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
       better-auth:
-        specifier: ^1.1.8
-        version: 1.1.8
+        specifier: ^1.1.19
+        version: 1.1.19
       better-auth-dashboard:
         specifier: workspace:*
         version: link:../../packages/better-auth-dashboard
@@ -155,8 +155,8 @@ importers:
         specifier: ^8.20.6
         version: 8.20.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       better-auth:
-        specifier: ^1.1.8
-        version: 1.1.8
+        specifier: ^1.1.19
+        version: 1.1.19
       better-fetch:
         specifier: ^1.1.2
         version: 1.1.2
@@ -2172,8 +2172,8 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
-  better-auth@1.1.8:
-    resolution: {integrity: sha512-8E9SH8PglrbMu2b5ue9c9/fQvvycIJJ+Z6+STtGJAAMljXtDWb4KUVbb/VNIAiGa0khMExgC3d3VSMreTsDB8Q==}
+  better-auth@1.1.19:
+    resolution: {integrity: sha512-OYf2oysca2+ASJ9hpGVkoLsz8b7bo65hHsVGpnIs9H5ORUnHJ7rKc6Wur4ZDCxuewBGUJMJyTAtXuo/cdAirjA==}
 
   better-call@0.3.3:
     resolution: {integrity: sha512-N4lDVm0NGmFfDJ0XMQ4O83Zm/3dPlvIQdxvwvgSLSkjFX5PM4GUYSVAuxNzXN27QZMHDkrJTWUqxBrm4tPC3eA==}
@@ -2891,6 +2891,10 @@ packages:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  nanostores@0.11.4:
+    resolution: {integrity: sha512-k1oiVNN4hDK8NcNERSZLQiMfRzEGtfnvZvdBvey3SQbgn8Dcrk0h1I6vpxApjb10PFUflZrgJ2WEZyJQ+5v7YQ==}
+    engines: {node: ^18.0.0 || >=20.0.0}
 
   napi-build-utils@1.0.2:
     resolution: {integrity: sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==}
@@ -5336,7 +5340,7 @@ snapshots:
 
   base64-js@1.5.1: {}
 
-  better-auth@1.1.8:
+  better-auth@1.1.19:
     dependencies:
       '@better-auth/utils': 0.2.3
       '@better-fetch/fetch': 1.1.12
@@ -5348,7 +5352,7 @@ snapshots:
       defu: 6.1.4
       jose: 5.9.6
       kysely: 0.27.5
-      uncrypto: 0.1.3
+      nanostores: 0.11.4
       zod: 3.24.1
     transitivePeerDependencies:
       - encoding
@@ -6049,6 +6053,8 @@ snapshots:
       thenify-all: 1.6.0
 
   nanoid@3.3.7: {}
+
+  nanostores@0.11.4: {}
 
   napi-build-utils@1.0.2: {}
 
