@@ -173,7 +173,7 @@ export function CreateUserDialog({
                 value={extraData}
                 onChange={(e) => setExtraData(e.currentTarget.value)}
                 className="col-span-3"
-                placeholder={'{\n  "someField": true\n}'}
+                placeholder={'{\n  "image": "https://example.com/logo"\n}'}
               />
             </div>
           </div>

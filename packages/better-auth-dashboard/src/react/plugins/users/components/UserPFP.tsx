@@ -33,5 +33,21 @@ export function UserPFP({
       />
       <AvatarFallback>{name}</AvatarFallback>
     </Avatar>
-  ) : null;
+  ) : (
+    <Avatar
+      className={className?.wrapper}
+      style={{
+        width: size === "sm" ? 25 : 64,
+        height: size === "sm" ? 25 : 64,
+      }}
+    >
+      <AvatarImage
+        width={size === "sm" ? 25 : 64}
+        height={size === "sm" ? 25 : 64}
+        src={""}
+        className={className?.image}
+      />
+      <AvatarFallback>?</AvatarFallback>
+    </Avatar>
+  );
 }
