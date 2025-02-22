@@ -1,4 +1,4 @@
-import type { AuthContext, BetterAuthPlugin } from "better-auth";
+import type { BetterAuthPlugin } from "better-auth";
 import {
   APIError,
   createAuthEndpoint,
@@ -11,6 +11,7 @@ type DashboardPluginConfig = {};
 
 export type DashboardPlugin = typeof dashboardPlugin;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function dashboardPlugin(config: DashboardPluginConfig = {}) {
   const plugin: BetterAuthPlugin = {
     id: "better-auth-dashboard",
@@ -56,9 +57,9 @@ export function dashboardPlugin(config: DashboardPluginConfig = {}) {
             });
           }
 
-          return ctx.json({
-            message: "Hello World",
-          });
+          return {
+            context: ctx,
+          };
         }
       ),
       getEndpoints: createAuthEndpoint(
@@ -86,8 +87,4 @@ export function dashboardPlugin(config: DashboardPluginConfig = {}) {
   };
 
   return plugin;
-}
-
-function hasAdminPlugin(context: AuthContext) {
-  return Boolean(context.options.plugins?.find((x) => x.id === "admin"));
 }
