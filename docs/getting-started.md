@@ -123,10 +123,10 @@ export default ({ params }: { params: Promise<{ all: string }> }) => {
 };
 ```
 
-> If the route to the dashboard is differnt than normal, you'll want to pass a `path` prop to the Dashboard, and write the relative path to the dashboard. (without trailing slashes)
+> If the route to the dashboard is different than normal, you'll want to pass a `path` prop to the Dashboard, and write the relative path to the dashboard. (without trailing slashes)
 
 ## That's it!
 
-Congradulations, that's all it takes to make yourself a powerful dynamic dashboard that works with Better auth.
+Congratulations, that's all it takes to make yourself a powerful dynamic dashboard that works with Better auth.
 
 Boot your dev server and enjoy.
